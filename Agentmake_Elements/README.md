@@ -1,0 +1,1 @@
+[Agentmake](https://github.com/eliranwong/agentmake) Elements for bible study agents development.
