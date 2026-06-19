@@ -31,9 +31,15 @@ def parse_query(query_str):
     
     for i, token in enumerate(tokens):
         clean_token = token.strip(',;').upper()
+        matched_ver = None
         if clean_token in available:
-            if clean_token not in versions:
-                versions.append(clean_token)
+            matched_ver = clean_token
+        elif (clean_token + 'X') in available:
+            matched_ver = clean_token + 'X'
+            
+        if matched_ver:
+            if matched_ver not in versions:
+                versions.append(matched_ver)
             ref_start_idx = i + 1
         else:
             break
