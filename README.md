@@ -1,6 +1,6 @@
 # Antigravity Bible Study Agents
 
-Welcome to the **Antigravity Bible Study Agents** ecosystem. This repository is configured specifically as a local workspace extension for the **Google Antigravity** agentic development platform, featuring an integrated team of 9 customized agent personas, 39 standalone exegesis/theology skills, and 39 custom slash commands.
+Welcome to the **Antigravity Bible Study Agents** ecosystem. This repository is configured specifically as a local workspace extension for the **Google Antigravity** agentic development platform, featuring an integrated team of 9 customized agent personas, 40 standalone exegesis/theology skills, and 40 custom slash commands.
 
 This repository works with all antigravity platform, Antigravity, Antigravity IDE, Antigravity CLI. Official downloads at: https://antigravity.google/download
 
@@ -17,11 +17,11 @@ All agentic configurations are self-contained under the `.agents/` folder at the
 │   ├── outline/
 │   ├── sermon/
 │   ├── translate_greek/
-│   └── ... (39 total skills)
+│   └── ... (40 total skills)
 └── workflows/            # Parameterized slash command workflows
     ├── outline.md
     ├── sermon.md
-    └── ... (39 total slash commands)
+    └── ... (40 total slash commands)
 ```
 
 ---

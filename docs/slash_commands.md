@@ -71,6 +71,8 @@ These commands focus on practical living, personal prayer, and preparing to teac
 | **`/quotes`** | Finds and quotes multiple relevant cross-references. | Verse Scripter | A biblical topic or query | `/quotes Covenant` |
 | **`/bible`** | Retrieves and compares Bible verses line-by-line from local databases. | Verse Scripter | A bible version(s) and reference(s) | `/bible NET CUV John 3:16-18` |
 | **`/commentary`** | Retrieves and compares Bible commentaries from local databases, extracting verse-specific sections. | Verse Scripter | A commentary version(s) and reference(s) | `/commentary AIC BI John 3:16-18` |
+| **`/xrefs`** | Retrieves and compares Bible cross-references from the local cross-reference database. | Verse Scripter | A bible version(s) and reference(s) | `/xrefs NET CUV John 3:16-18` |
+
 
 
 ---

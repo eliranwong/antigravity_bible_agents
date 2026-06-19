@@ -42,7 +42,13 @@ examples for use:
 make sure you don't hardcode bible version list available in ~/biblemate/data/bibles and ~/biblemate/data_custom/bibles , as users can dynamatically add or remove bible databases into or from this folder.  Instead of hardcoding a static bible version list, you should always check if bible version specified is a valid name in those folder.
 ```
 
+```
+Should you further improve the bible skill?  Right now, verse comparison like:
 
+John 3:16 [NET] For this is the way God loved the world: He gave his one and only Son, so that everyone who believes in him will not perish but have eternal life. [CUV] 「上帝愛世人，甚至將他的獨生子賜給〔他們〕，叫一切信他的，不致滅亡，反得永生。 [OHGBI] ΟὕτωςThus γὰρfor ἠγάπησενloved ὁ- ΘεὸςGod τὸνthe κόσμονworld, ὥστεthat τὸνthe ΥἱὸνSon, τὸνthe μονογενῆonly begotten, ἔδωκενHe gave, ἵναso that πᾶςeveryone ὁ- πιστεύωνbelieving εἰςin αὐτὸνHim μὴnot ἀπόληταιshould perish, ἀλλ᾽but ἔχῃshould have ζωὴνlife αἰώνιονeternal. ...
+
+The markdown display show all different versions for a single verse on a single line, which makes uers different to read.  Can you make the markdown display for version comparison better, with each version display on a single line.  For example, you may consider prefix each version with `\n* ` or `\n- ` or better alternatives?
+```
 
 ## Prompt for Creating Commentary Skill and /commentary Command
 
@@ -87,4 +93,66 @@ examples for use:
 /commentary BI John 3:16-18 # use `cBI.commentary` as it is specified
 
 /commentary AIC BI John 3:16-18 # compare `cAIC.commentary` and `cBI.commentary` for the given bible references
+```
+
+## Prompt for Creating Xrefs Skill and /xrefs Command
+
+```
+Create a new skill and a new slash command / workflow, to retrieve bible cross-references:
+
+skill name should be simply `xrefs`
+
+slash command should be simply `/xrefs`
+
+bible cross-reference database are in sqlite format, stored as `~/biblemate/data/cross-reference.sqlite`
+
+Remember use home variable instead of hardcoding absolute paths, to make this repository portable.
+
+The retrieval involves two steps, in which the second step needs to work with the `bible` skill.
+
+Step 1: retrieve cross reference verses information from table `ScrollMapper`
+
+Step 2: use the retrieved information to invoke `bible` skill to retrieve the actual cross reference verses content in different versions.
+
+An important note: before proceeding to step 2, prefix the cross reference verses information retrieved from Step 1 with the given verse range information retrieved from Step 1 in the format: `[given_verse_range] [cross_reference_verses_information]`, and pass this new formatted string to `bible` skill.
+
+For example, for `/xrefs John 3:16-18`, in step 1 you retrieve cross reference verses information for `John 3:16-18`, then in step 2, you invoke `bible` skill with the string `/bible John 3:16-18 [cross_reference_verses_information]`.
+
+As a result, the given bible reference content will be displayed at the top, then each of the cross reference verses content will be displayed line by line with each version on a single line.  
+
+About the use of bible version, there should already be mentioned in the bible skill.  just brief information here.
+
+NET.bible is the default bible if no bible version is specified
+
+the command `/xrefs` can take both bible version(s) and bible reference(s)
+
+if bible version is not specified, NET.bible is the default database for retrieval.  If a specified version, use that version, If more than one version is specified, all specified versions are retrieved with each verse display line by line comparison of the specified versions.
+
+bible references can be single or multiple verse(s), e.g. John 3:16-18; Rm 5-8
+
+bible references can also be a chapter a verse or multiple verse range
+
+examples for use: 
+
+/xrefs John 3:16 # use NET.bible for step 2 as default
+
+/xrefs John 3 # retrieve the whole chapter cross-references from the first verse to the last
+
+/xrefs John 3:16-18; Deut 6:4; Rom 5-8 # retrieve multiple verses cross-references from different books.
+
+/xrefs CUV John 3:16-18 # use CUV.bible for step 2 as it is specified
+
+/xrefs NET CUV John 3:16-18 # compare NET CUV every single cross-reference, line by line.
+
+Make the markdown display for version comparison better, for each verse with each version, make sure the whole version content for a single verse is displayed on a single line.  For example, you may consider prefix each version with `\n- `.  I think this is already in place in the bible skill.
+
+Update the root README.md file and the files in docs directory to reflect the new skills.
+```
+
+```
+Should you further improve the bible skill?  Right now, verse comparison like:
+
+John 3:16 [NET] For this is the way God loved the world: He gave his one and only Son, so that everyone who believes in him will not perish but have eternal life. [CUV] 「上帝愛世人，甚至將他的獨生子賜給〔他們〕，叫一切信他的，不致滅亡，反得永生。 [OHGBI] ΟὕτωςThus γὰρfor ἠγάπησενloved ὁ- ΘεὸςGod τὸνthe κόσμονworld, ὥστεthat τὸνthe ΥἱὸνSon, τὸνthe μονογενῆonly begotten, ἔδωκενHe gave, ἵναso that πᾶςeveryone ὁ- πιστεύωνbelieving εἰςin αὐτὸνHim μὴnot ἀπόληταιshould perish, ἀλλ᾽but ἔχῃshould have ζωὴνlife αἰώνιονeternal. ...
+
+The markdown display show all different versions for a single verse on a single line, which makes uers different to read.  Can you make the markdown display for version comparison better, with each version display on a single line.  For example, you may consider prefix each version with `\n* ` or `\n- ` or better alternatives?
 ```
