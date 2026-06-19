@@ -101,11 +101,27 @@ def make_matcher(query_str):
         
     return match_text
 
-def search_db(db_path, matcher):
+BOOK_CODES = {
+    "Gen": 1, "Exod": 2, "Lev": 3, "Num": 4, "Deut": 5, "Josh": 6, "Judg": 7, "Ruth": 8,
+    "1Sam": 9, "2Sam": 10, "1Kgs": 11, "2Kgs": 12, "1Chr": 13, "2Chr": 14, "Ezra": 15,
+    "Neh": 16, "Esth": 17, "Job": 18, "Ps": 19, "Prov": 20, "Eccl": 21, "Song": 22,
+    "Isa": 23, "Jer": 24, "Lam": 25, "Ezek": 26, "Dan": 27, "Hos": 28, "Joel": 29,
+    "Amos": 30, "Obad": 31, "Jonah": 32, "Mic": 33, "Nah": 34, "Hab": 35, "Zeph": 36,
+    "Hag": 37, "Zech": 38, "Mal": 39, "Matt": 40, "Mark": 41, "Luke": 42, "John": 43,
+    "Acts": 44, "Rom": 45, "1Cor": 46, "2Cor": 47, "Gal": 48, "Eph": 49, "Phil": 50,
+    "Col": 51, "1Thess": 52, "2Thess": 53, "1Tim": 54, "2Tim": 55, "Titus": 56, "Phlm": 57,
+    "Heb": 58, "Jas": 59, "1Pet": 60, "2Pet": 61, "1John": 62, "2John": 63, "3John": 64,
+    "Jude": 65, "Rev": 66
+}
+
+def search_db(db_path, matcher, book_idx=None):
     try:
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
-        cursor.execute("SELECT Book, Chapter, Verse, Scripture FROM Verses WHERE Book > 0 AND Chapter > 0 AND Verse > 0")
+        if book_idx is not None:
+            cursor.execute("SELECT Book, Chapter, Verse, Scripture FROM Verses WHERE Book = ? AND Chapter > 0 AND Verse > 0", (book_idx,))
+        else:
+            cursor.execute("SELECT Book, Chapter, Verse, Scripture FROM Verses WHERE Book > 0 AND Chapter > 0 AND Verse > 0")
         rows = cursor.fetchall()
         conn.close()
     except Exception as e:
@@ -122,11 +138,25 @@ def search_db(db_path, matcher):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python3 search_retriever.py [versions] [search_expression]")
-        print("Example: python3 search_retriever.py NET CUV love*God")
+        print("Usage: python3 search_retriever.py [--book BOOK_CODE] [versions] [search_expression]")
+        print("Example: python3 search_retriever.py --book Matt NET CUV love*God")
         sys.exit(1)
         
-    query_str = " ".join(sys.argv[1:])
+    args = sys.argv[1:]
+    book_idx = None
+    book_code = None
+    if args and args[0] == '--book':
+        if len(args) < 3:
+            print("Error: Missing arguments for --book option.")
+            sys.exit(1)
+        book_code = args[1]
+        book_idx = BOOK_CODES.get(book_code)
+        if not book_idx:
+            print(f"Error: Invalid book code: '{book_code}'")
+            sys.exit(1)
+        args = args[2:]
+        
+    query_str = " ".join(args)
     available_versions = get_available_versions()
     versions, search_expr = parse_query(query_str)
     
@@ -143,7 +173,7 @@ def main():
     
     for ver in versions:
         db_path = available_versions[ver]
-        matches = search_db(db_path, matcher)
+        matches = search_db(db_path, matcher, book_idx)
         version_matches[ver] = matches
         all_matching_coords.update(matches.keys())
         
