@@ -405,3 +405,30 @@ Make the markdown display for version comparison better, for each verse with eac
 
 Update the root README.md file and the files in docs directory to reflect the new skills.
 ```
+
+## Prompt for Creating Data Skill and /data Command
+
+```
+Now, create a new skill and a new slash command workflow, to list available resources.
+
+skill name: `data`
+
+slash command: `/data`
+
+Currently, this skill and command work with three main resources:
+
+> /data bible # list all available bible versions.
+
+as mentioned, bible databases are in sqlite format, stored either in ~/biblemate/data/bibles or ~/biblemate/data_custom/bibles
+
+> /data commentary # list all available commentary versions.
+
+as mentioned, commentaries are in sqlite format, stored either in `~/biblemate/data/commentaries` or `~/biblemate/data_custom/commentaries`
+
+> /data lexicon # list all available lexicon versions.
+
+as mentioned, lexicon contents are in sqlite format, stored either in `~/biblemate/data/lexicons` or `~/biblemate/data_custom/lexicons`
+
+Note: make sure you don't hardcode available versions.  Instead of hardcoding a static version list, you should always check afresh the available versions in the mentioned folders.  Each folder has its own list of versions.  so you need to check both folders.
+
+```
