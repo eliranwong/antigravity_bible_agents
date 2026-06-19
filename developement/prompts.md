@@ -315,6 +315,51 @@ examples for use:
 /commentary AIC BI John 3:16-18 # compare `cAIC.commentary` and `cBI.commentary` for the given bible references
 ```
 
+## Prompt for Creating Lexicon Skill and /lexicon Command
+
+```
+Now, along a similar line, create a new skill and a new slash command workflow, to retrieve bible lexicon content:
+
+skill name should be simply `lexicon`
+
+slash command should be simply `/lexicon`
+
+lexicon contents are in sqlite format, stored either in `~/biblemate/data/lexicon` or `~/biblemate/data_custom/lexicon`
+
+Note: make sure you don't hardcode lexicon version list available in `~/biblemate/data/lexicon` and `~/biblemate/data_custom/lexicon` , because users can dynamatically add or remove lexicon databases into or from this folder.  Instead of hardcoding a static lexicon version list, you should always check if lexicon version specified is a valid name in those folder.
+
+Remember use home variable instead of hardcoding absolute paths, to make this repository portable.
+
+Valid lexicon filenames are formatted like `l<lexicon_version>.lexicon`, so each lexicon filename starts with `l` followed by the lexicon version abbreviation, then `.lexicon`. for example:
+`lLSG.lexicon`, `lSTR.lexicon`, etc. and each is its own lexicon database.
+
+retrieve from table `Lexicon`, the `Scripture` column contains the lexicon text content that is intended to be retrieved. 
+
+Note: there may be a challenge for you, some Lexicon table, like the one in `lLSG.lexicon` contains Book, Chapter, and Verse entries, but most of the others have Book, Chapter entries only.  In the latter case, the `Scripture` column contains the lexicon text content for the whole chapter.  You need a further step to retrieve only the relevant verses/verse range sections from the lexicon text content, based on the given verse range.  For example, if verse range is John 3:16-18, and the lexicon text content is for the whole chapter, you need to retrieve only the sections relevant to John 3:16-18.  You should use text processing, and natural language understanding techniques to achieve this goal or any better alternatives.
+
+`lLSG.lexicon` is the default lexicon if no lexicon version is specified
+
+the command `/lexicon` can take both lexicon version(s) and bible reference(s)
+
+if lexicon version is not specified, `lLSG.lexicon` is the default database for retrieval.  If a specified version, use that version, If more than one version is specified, all specified versions are retrieved for comparison for each given bible reference.
+
+bible references can be single or multiple verse(s), e.g. John 3:16-18; Rm 5-8
+
+bible references can also be a chapter a verse or multiple verse range
+
+examples for use: 
+
+/lexicon John 3:16 # use `lLSG.lexicon` as default
+
+/lexicon John 3 # retrieve the whole chapter from the first verse to the last
+
+/lexicon John 3:16-18; Deut 6:4; Rom 5-8 # retrieve multiple lexicon entries for the given verses from different books.
+
+/lexicon LSG STR John 3:16-18 # use `lLSG.lexicon` and `lSTR.lexicon` for comparison
+
+/lexicon LSG STR John 3:16-18; Deut 6:4; Rom 5-8 # compare `lLSG.lexicon` and `lSTR.lexicon` for the given bible references
+```
+
 ## Prompt for Creating Xrefs Skill and /xrefs Command
 
 ```

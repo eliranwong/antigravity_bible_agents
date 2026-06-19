@@ -6,6 +6,10 @@ import re
 import subprocess
 import datetime
 
+# Get workspace root dynamically
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..', '..'))
+
 def slugify(text):
     # Remove XML/HTML tags
     text = re.sub(r'<[^>]+>', '', text)
@@ -158,7 +162,7 @@ def export_conversation(is_whole):
         if not title_slug:
             title_slug = "conversation"
             
-        export_dir = "/Users/admin/dev/antigravity_bible_agents/export/md"
+        export_dir = os.path.join(REPO_ROOT, "export", "md")
         os.makedirs(export_dir, exist_ok=True)
         
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -209,7 +213,7 @@ def export_conversation(is_whole):
         if not title_slug:
             title_slug = "response"
             
-        export_dir = "/Users/admin/dev/antigravity_bible_agents/export/md"
+        export_dir = os.path.join(REPO_ROOT, "export", "md")
         os.makedirs(export_dir, exist_ok=True)
         
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -236,7 +240,7 @@ def main():
     possible_paths = [
         input_str,
         os.path.abspath(input_str),
-        os.path.join("/Users/admin/dev/antigravity_bible_agents", input_str)
+        os.path.join(REPO_ROOT, input_str)
     ]
     
     found_file = None
