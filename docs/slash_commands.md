@@ -75,7 +75,12 @@ These commands focus on practical living, personal prayer, and preparing to teac
 | **`/search`** | Searches for words or phrases with wildcards and logical operators. | Verse Scripter | Search query with optional versions | `/search NET KJV love*God` |
 | **`/<Book>`** | Searches for words or phrases within a specific Bible book (66 book-specific commands, e.g., `/Gen`, `/Matt`, `/Rev`). | Verse Scripter | Search query with optional versions | `/Matt NET KJV love*God` |
 
+### Book-Specific Search Commands
 
+To search for words or phrases within a single book, you can use the following 66 book-specific slash commands:
+
+*   **Old Testament:** `/Gen`, `/Exod`, `/Lev`, `/Num`, `/Deut`, `/Josh`, `/Judg`, `/Ruth`, `/1Sam`, `/2Sam`, `/1Kgs`, `/2Kgs`, `/1Chr`, `/2Chr`, `/Ezra`, `/Neh`, `/Esth`, `/Job`, `/Ps`, `/Prov`, `/Eccl`, `/Song`, `/Isa`, `/Jer`, `/Lam`, `/Ezek`, `/Dan`, `/Hos`, `/Joel`, `/Amos`, `/Obad`, `/Jonah`, `/Mic`, `/Nah`, `/Hab`, `/Zeph`, `/Hag`, `/Zech`, `/Mal`
+*   **New Testament:** `/Matt`, `/Mark`, `/Luke`, `/John`, `/Acts`, `/Rom`, `/1Cor`, `/2Cor`, `/Gal`, `/Eph`, `/Phil`, `/Col`, `/1Thess`, `/2Thess`, `/1Tim`, `/2Tim`, `/Titus`, `/Phlm`, `/Heb`, `/Jas`, `/1Pet`, `/2Pet`, `/1John`, `/2John`, `/3John`, `/Jude`, `/Rev`
 
 ---
 
