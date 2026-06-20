@@ -58,7 +58,7 @@ Execute these phases in order. Each phase has mandatory quality gates.
    > [!IMPORTANT]
    > **Original Request Preservation**: Always write the raw, full, detailed user request to a temporary file (e.g., in the `scratch/` directory) and pass that file path to `--init` instead of trying to pass the request directly as a string argument. This preserves all formatting, bullet points, and constraints without CLI truncation or quoting errors.
 
-### Phase 1: Data Retrieval (Adopt **Oxford Bible Scholar** persona)
+### Phase 1: Data Retrieval (Adopt **Bible Textual Critic** and **Biblical Linguistic Analyst** persona)
 
 Retrieve raw data from local databases. These skills are independent and CAN run in parallel:
 

@@ -33,7 +33,7 @@ graph TD
     Phase0 --> Plan["Master Study Plan Generated & Validated"]
 
     Plan --> Phase1["Phase 1: Local Data Retrieval"]
-    subgraph Phase1_Sub ["Phase 1: Data (Biblical Scholar)"]
+    subgraph Phase1_Sub ["Phase 1: Data (Bible Textual Critic & Linguistic Analyst)"]
         Phase1 --> Db1[("Bible Texts")]
         Phase1 --> Db2[("Greek/Hebrew Original")]
         Phase1 --> Db3[("Commentaries")]

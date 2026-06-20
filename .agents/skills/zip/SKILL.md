@@ -15,4 +15,6 @@ When executing this skill:
    ```bash
    python3 .agents/skills/zip/zip_creator.py
    ```
-3. **Report Status**: Once the zip is created successfully, output a clear summary to the user confirming the location and contents of `manual_setup.zip`.
+3. **Git Integration**: The script will automatically detect if the repository is a Git repository. If it is, and `manual_setup.zip` has modifications, it will stage, commit, and push it to the remote repository.
+4. **Report Status**: Once the ZIP archive is successfully created and Git integration has run, output a clear summary confirming the creation of `manual_setup.zip` and the Git synchronization status.
+
