@@ -22,54 +22,70 @@ The `/biblemate` command (backed by the [.agents/skills/biblemate](.agents/skill
 * **Persona Rotation**: It automatically rotates AI personas based on the study phase (e.g., using the *Oxford Scholar* for exegesis, *Cambridge Theologian* for systematic theology, *Billy Graham* for devotions, and *Compassionate Pastor* for first-person prayers) to ensure academic rigor and spiritual depth.
 * **100% Scripture Integrity**: It strictly enforces the local `bible` query skill to fetch all scriptures directly from SQLite databases, completely eliminating AI scripture hallucinations.
 * **Quality Gate Auditing**: It validates the Master Plan against minimum skill requirements for the study type (passage, book, topical, or sermon) and computes a 0–100 quality score, ensuring no thin or shallow outputs are ever accepted.
-* **Unified Synthesized Report**: It merges and synthesizes all intermediate steps into a clean, standalone, relative-linked report containing full scripture quotes, detailed outlines, lexical definitions, and practical application.
+* **Iterative Final Response**: After producing a pre-final overview that surveys all study outputs, it adopts the *Master Biblical Writer* persona and runs an iterative Draft→Integrate→Audit→Revise writing loop (minimum 2 cycles) to produce a comprehensive, standalone, publication-quality final response that directly answers the original request.
 
 ### `/biblemate` Workflow Architecture
 
 ```mermaid
 graph TD
-    User([User Request]) --> Phase0[Phase 0: Planning & Init]
-    Phase0 --> Plan[Master Study Plan Generated & Validated]
-    
-    Plan --> Phase1[Phase 1: Local Data Retrieval]
+    User(["User Request"]) --> Refine["Refine & Classify Request"]
+    Refine --> Phase0["Phase 0: Planning & Init"]
+    Phase0 --> Plan["Master Study Plan Generated & Validated"]
+
+    Plan --> Phase1["Phase 1: Local Data Retrieval"]
     subgraph Phase1_Sub ["Phase 1: Data (Biblical Scholar)"]
-        Phase1 --> Db1[(Bible Texts)]
-        Phase1 --> Db2[(Greek/Hebrew Original)]
-        Phase1 --> Db3[(Commentaries)]
-        Phase1 --> Db4[(Lexicons & Morphology)]
-        Phase1 --> Db5[(Cross-References)]
+        Phase1 --> Db1[("Bible Texts")]
+        Phase1 --> Db2[("Greek/Hebrew Original")]
+        Phase1 --> Db3[("Commentaries")]
+        Phase1 --> Db4[("Lexicons & Morphology")]
+        Phase1 --> Db5[("Cross-References")]
     end
-    
-    Db1 & Db2 & Db3 & Db4 & Db5 --> Phase2[Phase 2: Analysis & Exegesis]
+
+    Db1 & Db2 & Db3 & Db4 & Db5 --> Phase2["Phase 2: Analysis & Exegesis"]
     subgraph Phase2_Sub ["Phase 2: Exegesis (Biblical Scholar)"]
-        Phase2 --> Outline[Structural Outline]
-        Phase2 --> Keywords[Word Study]
-        Phase2 --> Context[Historical/Cultural Context]
-        Phase2 --> Flow[Thought Flow Progression]
+        Phase2 --> Outline["Structural Outline"]
+        Phase2 --> Keywords["Word Study"]
+        Phase2 --> Context["Historical/Cultural Context"]
+        Phase2 --> Flow["Thought Flow Progression"]
     end
-    
-    Outline & Keywords & Context & Flow --> Phase3[Phase 3: Theological Synthesis]
+
+    Outline & Keywords & Context & Flow --> Phase3["Phase 3: Theological Synthesis"]
     subgraph Phase3_Sub ["Phase 3: Theology (Theologian)"]
-        Phase3 --> Themes[Doctrinal Mapping]
-        Phase3 --> Systematic[Systematic Soteriology]
-        Phase3 --> Canon[Canonical Narrative Fit]
+        Phase3 --> Themes["Doctrinal Mapping"]
+        Phase3 --> Systematic["Systematic Soteriology"]
+        Phase3 --> Canon["Canonical Narrative Fit"]
     end
-    
-    Themes & Systematic & Canon --> Phase4[Phase 4: Devotion & Application]
+
+    Themes & Systematic & Canon --> Phase4["Phase 4: Devotion & Application"]
     subgraph Phase4_Sub ["Phase 4: Heart (Compassionate Pastor)"]
-        Phase4 --> Devotion[Devotional Reflection]
-        Phase4 --> Application[Practical Action Steps]
-        Phase4 --> Prayer[Heartfelt Scriptural Prayer]
+        Phase4 --> Devotion["Devotional Reflection"]
+        Phase4 --> Application["Practical Action Steps"]
+        Phase4 --> Prayer["Heartfelt Scriptural Prayer"]
     end
-    
-    Devotion & Application & Prayer --> Phase5[Phase 5: Synthesis & Sync]
-    subgraph Phase5_Sub ["Phase 5: Report (Content Interpreter)"]
-        Phase5 --> FinalReport[Unified Final Report]
-        Phase5 --> QualScore[Quality Score Check - 100/100]
-        Phase5 --> GitSync[Git Sync & Push]
+
+    Devotion & Application & Prayer --> Phase5["Phase 5: Pre-Final Overview"]
+    subgraph Phase5_Sub ["Phase 5: Overview (Content Interpreter)"]
+        Phase5 --> Survey["Survey All Study Outputs"]
+        Phase5 --> GapCheck["Gap Analysis & Content Mapping"]
+        Phase5 --> QualScore["Quality Score Check"]
     end
-    
-    FinalReport --> FinalUser([Publication-Quality Study])
+
+    Survey & GapCheck & QualScore --> Phase6["Phase 6: Final Response"]
+    subgraph Phase6_Sub ["Phase 6: Writing (Master Biblical Writer)"]
+        Phase6 --> Draft["Step 1: Comprehensive Draft"]
+        Draft --> Integrate["Step 2: Multi-Pass Integration"]
+        Integrate --> Audit["Step 3: Audit Against 9 Criteria"]
+        Audit --> Revise["Step 4: Revise & Strengthen"]
+        Revise -->|"Loop min 2x"| Audit
+        Revise --> FinalGate["Step 6: Final Quality Gate"]
+    end
+
+    FinalGate --> Phase7["Phase 7: Sync"]
+    subgraph Phase7_Sub ["Phase 7: Sync"]
+        Phase7 --> GitSync["Git Commit & Push"]
+    end
+
+    FinalGate --> FinalUser(["Publication-Quality Final Response"])
 ```
 
 ---
