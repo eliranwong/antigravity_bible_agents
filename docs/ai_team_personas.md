@@ -13,3 +13,4 @@ The ecosystem configures a team of 12 specialized personas defined in [.agents/a
 - **Bible Textual Critic**: Analyzes manuscript traditions, textual variants, translations, versions, and databases.
 - **Master Biblical Writer**: Integrates all study outputs into a single, publication-quality final document.
 - **AI Agent Creator**: Meta-agent designed to construct new, safe Bible study agent descriptions.
+- **Study Plan & Phase Quality Auditor**: Formulates dynamic multi-phase study plans, sets phase goals, audits outputs, and adapts plans dynamically to resolve quality gaps.
