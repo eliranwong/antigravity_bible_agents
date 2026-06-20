@@ -6,7 +6,7 @@ description: Retrieve bible morphology data from the local morphology database f
 # Bible Morphology Retrieval Skill
 
 ## Overview
-This standalone skill enables any agent to retrieve word-by-word morphology details from the local SQLite database `/Users/admin/biblemate/data/morphology.sqlite`.
+This standalone skill enables any agent to retrieve word-by-word morphology details from the local SQLite database `~/biblemate/data/morphology.sqlite`.
 
 ## Guidelines & Objectives
 When executing this skill:
