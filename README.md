@@ -86,9 +86,9 @@ If you wish to bring these custom Bible study agents and tools into a **differen
 
 You can easily configure your preferred default versions for Bible translation, commentary, and lexicon lookups without modifying any code. To do this, edit the plain text files under the `preferences/` folder at the root of the repository:
 
-- **Bible Default Version**: Set your preference (e.g. `NET`, `KJV`, `ESV2016`) in [preferences/bible.md](file:///Users/admin/dev/antigravity_bible_agents/preferences/bible.md).
-- **Commentary Default Version**: Set your preference (e.g. `AIC`, `BI`, `BARNES`) in [preferences/commentary.md](file:///Users/admin/dev/antigravity_bible_agents/preferences/commentary.md).
-- **Lexicon Default Version**: Set your preference (e.g. `SECE`, `BDB`, `Thayer`) in [preferences/lexicon.md](file:///Users/admin/dev/antigravity_bible_agents/preferences/lexicon.md).
+- **Bible Default Version**: Set your preference (e.g. `NET`, `KJV`, `ESV2016`) in [preferences/bible.md](preferences/bible.md).
+- **Commentary Default Version**: Set your preference (e.g. `AIC`, `BI`, `BARNES`) in [preferences/commentary.md](preferences/commentary.md).
+- **Lexicon Default Version**: Set your preference (e.g. `SECE`, `BDB`, `Thayer`) in [preferences/lexicon.md](preferences/lexicon.md).
 
 These files are dynamically read by the respective retrievers on every execution.
 
@@ -96,8 +96,9 @@ These files are dynamically read by the respective retrievers on every execution
 
 ## Documentation
 
-For in-depth details about the workflows, slash commands, and team structure, please refer to the files under the [docs/](file:///Users/admin/dev/antigravity_bible_agents/docs) directory:
+For in-depth details about the workflows, slash commands, and team structure, please refer to the files under the [docs/](docs) directory:
 
-- **[ai_team_personas.md](file:///Users/admin/dev/antigravity_bible_agents/docs/ai_team_personas.md)**: Detailed profiles, guidelines, and expertise profiles for each of the 9 custom AI study personas.
-- **[slash_commands.md](file:///Users/admin/dev/antigravity_bible_agents/docs/slash_commands.md)**: A complete reference guide for all 110 custom slash commands (workflows), organized by study category with syntax examples.
-- **[README.md (Documentation Index)](file:///Users/admin/dev/antigravity_bible_agents/docs/README.md)**: Index and overview of repository documentation.
+- **[ai_team_personas.md](docs/ai_team_personas.md)**: Detailed profiles, guidelines, and expertise profiles for each of the 9 custom AI study personas.
+- **[slash_commands.md](docs/slash_commands.md)**: A complete reference guide for all 110 custom slash commands (workflows), organized by study category with syntax examples.
+- **[README.md (Documentation Index)](docs/README.md)**: Index and overview of repository documentation.
+
