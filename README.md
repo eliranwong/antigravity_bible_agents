@@ -26,9 +26,9 @@ All agentic configurations are self-contained under the `.agents/` folder at the
 
 ---
 
-## Setup & How to Use with Google Antigravity
+## Quick Start & Auto-Discovery
 
-Because this repository uses the standard Antigravity workspace configuration schema, there is **zero manual setup or registration required** to load the agents, skills, and workflows.
+Because this repository is already configured with the standard Antigravity workspace schema, there is **zero manual configuration or agent registration required** to load the custom personas, skills, and workflows when you open this project folder in your IDE.
 
 1. **Open Workspace**: Open the workspace root directory in your Antigravity-integrated IDE (such as Cursor or VS Code configured with the Antigravity extension) or run the CLI inside this directory:
    ```bash
@@ -36,15 +36,50 @@ Because this repository uses the standard Antigravity workspace configuration sc
    ```
 2. **Auto-Discovery**: Antigravity automatically detects the `.agents/` directory at the project root. It will:
    - Load the 9 custom personas from `agents.md` into the agent selection registry.
-   - Register the 110 skills in `.agents/skills/` for progressive disclosure (they will be loaded dynamically into the context when a user request matches their description).
+   - Register the 110 skills in `.agents/skills/` for progressive disclosure.
    - Expose the 110 workflow files in `.agents/workflows/` as native slash commands.
 
-3. **Running Slash Commands**: In the Antigravity chat input, type `/` to bring up the commands menu, followed by arguments (e.g. references, topics, or words):
+3. **Meet System Prerequisites**: To run local Scripture database lookups and document conversions, please make sure the [System Prerequisites](#system-prerequisites) are installed on your machine.
+
+4. **Running Slash Commands**: In the Antigravity chat input, type `/` to bring up the commands menu, followed by arguments (e.g. references, topics, or words):
    - `/outline Ephesians 1`
    - `/sermon Romans 8:28`
    - `/translate_greek John 1:1`
 
 For a full reference of all available slash commands and usage examples, see the [Slash Commands Reference Guide](docs/slash_commands.md).
+
+---
+
+## System Prerequisites
+
+To utilize the core capabilities of the local Bible study tools (such as database lookups and document exports), you must ensure the following dependencies are installed on your system:
+
+1. **Local Bible Databases (`biblematedata`)**:  
+   To enable local Scripture database lookups, you need to install the `biblematedata` package and initialize it:
+   ```bash
+   pip install --upgrade biblematedata
+   biblematedata
+   ```
+   *Note: For more details on configuring database files, refer to the official [biblemate repository](https://github.com/eliranwong/biblemate).*
+
+2. **Document Converter (`pandoc`)**:  
+   To convert your study guides, outlines, and sermons into formats like Microsoft Word (`.docx`), ensure `pandoc` is installed on your system:
+   - **macOS**: `brew install pandoc`
+   - **Windows**: `winget install JohnMacFarlane.Pandoc` (or download the setup installer)
+   - **Linux**: `sudo apt install pandoc` (or equivalent package manager command)
+
+---
+
+## Setting Up a New Repository
+
+If you wish to bring these custom Bible study agents and tools into a **different, brand-new repository** of your own, follow these steps:
+
+1. **Copy Configuration & Preferences (Choose one method)**:
+   - **Method A - Git users (Recommended)**: **Fork** this repository on GitHub and `git clone` it. This is highly recommended because when you write your own studies, generate exports, and run the `/sync` command, all changes will be synchronized cleanly to your own personal remote repository.
+   - **Method B - Manual Copy**: Manually copy the `.agents/` and `preferences/` folders from the root of this repository into the root of your new project. Google Antigravity will automatically discover the custom personas, skills, and workflows, while the `preferences/` folder preserves your default database preferences.
+
+2. **Install System Prerequisites**: Ensure you have configured the [System Prerequisites](#system-prerequisites) on your system.
+
 
 ---
 
@@ -57,30 +92,6 @@ You can easily configure your preferred default versions for Bible translation, 
 - **Lexicon Default Version**: Set your preference (e.g. `SECE`, `BDB`, `Thayer`) in [preferences/lexicon.md](file:///Users/admin/dev/antigravity_bible_agents/preferences/lexicon.md).
 
 These files are dynamically read by the respective retrievers on every execution.
-
----
-
-## Setting Up a New Repository
-
-To bring these powerful Bible study tools into a brand-new repository, follow these simple setup steps:
-
-1. **Copy Configuration & Preferences (Choose one method)**:
-   - **Method A - Git users (Recommended)**: **Fork** this repository on GitHub and `git clone` it. This is highly recommended because when you write your own studies, generate exports, and run the `/sync` command, all changes will be synchronized cleanly to your own personal remote repository.
-   - **Method B - Manual Copy**: Manually copy the `.agents/` and `preferences/` folders from the root of this repository into the root of your new project. Google Antigravity will automatically discover the custom personas, skills, and workflows, while the `preferences/` folder preserves your default database preferences.
-
-2. **Install `biblematedata` (for Bible Database Retrieval)**:  
-   To enable local Scripture database lookups, you need to install the `biblematedata` package and initialize it:
-   ```bash
-   pip install --upgrade biblematedata
-   biblematedata
-   ```
-   *Note: For more details on configuring database files, refer to the official [biblemate repository](https://github.com/eliranwong/biblemate).*
-
-3. **Install `pandoc` (for Document Conversion)**:  
-   To convert your study guides, outlines, and sermons into formats like Microsoft Word (`.docx`), ensure `pandoc` is installed on your system:
-   - **macOS**: `brew install pandoc`
-   - **Windows**: `winget install JohnMacFarlane.Pandoc` (or download the setup installer)
-   - **Linux**: `sudo apt install pandoc` (or equivalent package manager command)
 
 ---
 
