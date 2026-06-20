@@ -44,9 +44,21 @@ def parse_query(query_str):
         else:
             break
             
+    default_version = 'SECE'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    pref_path = os.path.abspath(os.path.join(script_dir, '..', '..', '..', 'preferences', 'lexicon.md'))
+    if os.path.exists(pref_path):
+        try:
+            with open(pref_path, 'r', encoding='utf-8') as f:
+                pref_content = f.read().strip().upper()
+                if pref_content:
+                    default_version = pref_content
+        except Exception:
+            pass
+
     if not versions:
-        if 'SECE' in available:
-            versions = ['SECE']
+        if default_version in available:
+            versions = [default_version]
         elif available:
             versions = [sorted(available.keys())[0]]
         else:

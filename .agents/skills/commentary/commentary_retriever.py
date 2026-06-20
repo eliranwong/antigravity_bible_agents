@@ -129,9 +129,21 @@ def parse_query(query_str):
         else:
             break
             
+    default_version = 'AIC'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    pref_path = os.path.abspath(os.path.join(script_dir, '..', '..', '..', 'preferences', 'commentary.md'))
+    if os.path.exists(pref_path):
+        try:
+            with open(pref_path, 'r', encoding='utf-8') as f:
+                pref_content = f.read().strip().upper()
+                if pref_content:
+                    default_version = pref_content
+        except Exception:
+            pass
+
     if not versions:
-        if 'AIC' in available_commentaries:
-            versions = ['AIC']
+        if default_version in available_commentaries:
+            versions = [default_version]
         elif available_commentaries:
             versions = [sorted(available_commentaries.keys())[0]]
         else:

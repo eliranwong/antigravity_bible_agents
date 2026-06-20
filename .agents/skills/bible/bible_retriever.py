@@ -128,10 +128,22 @@ def parse_query(query_str):
             ref_start_idx = i + 1
         else:
             break
-            
+
+    default_version = 'NET'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    pref_path = os.path.abspath(os.path.join(script_dir, '..', '..', '..', 'preferences', 'bible.md'))
+    if os.path.exists(pref_path):
+        try:
+            with open(pref_path, 'r', encoding='utf-8') as f:
+                pref_content = f.read().strip().upper()
+                if pref_content:
+                    default_version = pref_content
+        except Exception:
+            pass
+
     if not versions:
-        if 'NET' in available_versions:
-            versions = ['NET']
+        if default_version in available_versions:
+            versions = [default_version]
         elif available_versions:
             versions = [sorted(available_versions.keys())[0]]
         else:

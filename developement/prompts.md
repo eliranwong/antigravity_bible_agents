@@ -50,6 +50,10 @@ John 3:16 [NET] For this is the way God loved the world: He gave his one and onl
 The markdown display show all different versions for a single verse on a single line, which makes uers different to read.  Can you make the markdown display for version comparison better, with each version display on a single line.  For example, you may consider prefix each version with `\n* ` or `\n- ` or better alternatives?
 ```
 
+```
+I noted an issue.  Whenever you or agents, specified in [agents.md](file;file:///Users/admin/dev/antigravity_bible_agents/.agents/agents.md) , quote bible verse content in their responses.  They use different bible versions, out of their memory, inconsistently.  Can you make sure whenever you or other agents need to quote bible verse content, always use the skill `bible`, so that bible verse content is retrieved from solid local database.
+```
+
 ## Prompt for Creating Search Skill and /search Command
 
 ```
