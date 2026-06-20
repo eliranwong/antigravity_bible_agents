@@ -27,7 +27,7 @@ The objective of this study is to perform a rigorous historical-grammatical exeg
 ---
 
 ## 2. Scripture Text (Multiple Versions)
-To appreciate the translation nuances, we compare John 3:14-18 across four key versions. (For the complete text analysis, see [001-bible.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/001-bible.md)):
+To appreciate the translation nuances, we compare John 3:14-18 across four key versions. (For the complete text analysis, see [001-bible.md](001-bible.md)):
 
 ### John 3:14
 > **[ESV2016]** And as Moses lifted up the serpent in the wilderness, so must the Son of Man be lifted up,  
@@ -62,7 +62,7 @@ To appreciate the translation nuances, we compare John 3:14-18 across four key v
 ---
 
 ## 3. Original Language Analysis
-The original Greek text provides the grammatical architecture for John’s theology. (For the complete word mapping, see [002-original.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/002-original.md)):
+The original Greek text provides the grammatical architecture for John’s theology. (For the complete word mapping, see [002-original.md](002-original.md)):
 
 > **John 3:16 (OHGB)**  
 > Οὕτως γὰρ ἠγάπησεν ὁ Θεὸς τὸν κόσμον ὥστε τὸν Υἱὸν τὸν μονογενῆ ἔδωκεν ἵνα πᾶς ὁ πιστεύων εἰς αὐτὸν μὴ ἀπόληται ἀλλ᾽ ἔχῃ ζωὴν αἰώνιον
@@ -91,7 +91,7 @@ The original Greek text provides the grammatical architecture for John’s theol
 ---
 
 ## 4. Key Word Study
-A semantic analysis of the Greek vocabulary reveals the precise nuances of John’s message. (For the full word study, see [003-morphology.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/003-morphology.md) and [006-lexicon.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/006-lexicon.md)):
+A semantic analysis of the Greek vocabulary reveals the precise nuances of John’s message. (For the full word study, see [003-morphology.md](003-morphology.md) and [006-lexicon.md](006-lexicon.md)):
 
 1. **ἠγάπησεν (*ēgapēsen*)**: From *agapaō*. Aorist active indicative. Denotes a decisive, completed historical act of love. This is a covenantal, self-giving love that is determined by the character of God (the Giver) rather than the worthiness of the recipient.
 2. **κόσμος (*kosmos*)**: Accusative masculine noun. In Johannine literature, *kosmos* represents fallen humanity in its state of collective alienation and active hostility toward God. God's love is magnified because it is directed toward rebels.
@@ -103,7 +103,7 @@ A semantic analysis of the Greek vocabulary reveals the precise nuances of John�
 ---
 
 ## 5. Historical & Cultural Context
-Contextualizing John 3:16 within the Nicodemus dialogue reveals its radical character. (For the complete historical context, see [008-nt-context.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/008-nt-context.md)):
+Contextualizing John 3:16 within the Nicodemus dialogue reveals its radical character. (For the complete historical context, see [008-nt-context.md](008-nt-context.md)):
 
 * **Nicodemus the Pharisee**: Nicodemus was a ruler of the Jews (a member of the Sanhedrin) and a prominent teacher of the Law. Under Roman occupation, the Pharisaic party held immense religious sway. Nicodemus’ decision to visit Jesus "by night" (John 3:2) indicates his caution; public association with a controversial prophet who had just cleansed the temple could result in severe social shame and political ruin.
 * **The Mosaic Shadow: The Bronze Serpent**: Jesus connects His identity and mission to a specific event in Numbers 21:4-9. The Israelites, complaining in the wilderness, were struck by poisonous serpents as a divine judgment. The remedy was looking at a bronze serpent set on a pole by Moses. Whoever looked lived. Jesus uses this as the supreme typological pattern: He must be "lifted up" (*hypsōthēnai*—crucified and exalted) so that all who look to Him in faith may escape the deadly poison of sin.
@@ -111,7 +111,7 @@ Contextualizing John 3:16 within the Nicodemus dialogue reveals its radical char
 ---
 
 ## 6. Cross-References & Parallel Passages
-The scriptural web connects John 3:16 to both testaments. (For the thematic cross-reference breakdown, see [004-xrefs.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/004-xrefs.md)):
+The scriptural web connects John 3:16 to both testaments. (For the thematic cross-reference breakdown, see [004-xrefs.md](004-xrefs.md)):
 
 * **God's Proactive Love**:
   * **1 John 4:9–10**: "By this the love of God is revealed... that God sent His only Son." This is the closest theological parallel, emphasizing the Son as the atoning sacrifice (*hilasmos*).
@@ -126,7 +126,7 @@ The scriptural web connects John 3:16 to both testaments. (For the thematic cros
 ---
 
 ## 7. Commentary Insights
-Classic and modern commentators offer rich, diverse angles on John 3:16. (For the complete commentary analysis, see [005-commentary.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/005-commentary.md)):
+Classic and modern commentators offer rich, diverse angles on John 3:16. (For the complete commentary analysis, see [005-commentary.md](005-commentary.md)):
 
 * **John Calvin**: Emphasizes that God's sovereign, unmerited love is the "first cause" and source of salvation, excluding all human merit. He notes that the term *monogenēs* is used to magnify the intensity of this love, and that the universal "whosoever" leaves unbelievers without excuse.
 * **John Gill**: Highlights the radical shift from Jewish Rabbinic exclusivism. The Jews believed the Messiah came to condemn the Gentile nations and rescue only Israel. Gill argues that "the world" (*kosmos*) here specifically includes the Gentiles, showing that God's covenant love extends globally to all who believe.
@@ -136,7 +136,7 @@ Classic and modern commentators offer rich, diverse angles on John 3:16. (For th
 ---
 
 ## 8. Theological Themes
-The passage serves as a theological intersection for several systematic doctrines. (For the complete theological analysis, see [011-themes.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/011-themes.md) and [012-theology.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/012-theology.md)):
+The passage serves as a theological intersection for several systematic doctrines. (For the complete theological analysis, see [011-themes.md](011-themes.md) and [012-theology.md](012-theology.md)):
 
 * **Theology Proper (God as Giver)**: Redemption originates in the Father's heart. In the economy of salvation, the Father is the Giver and sender, and the Son is the gift.
 * **Christology (The Exalted Mediator)**: Jesus is co-eternal and co-essential (*monogenēs*). His mission is to be "lifted up" on the cross, uniting His divine glory with His sacrificial human suffering.
@@ -147,7 +147,7 @@ The passage serves as a theological intersection for several systematic doctrine
 ---
 
 ## 9. Exegetical Insights
-A deep literary and grammatical study reveals key features of the discourse. (For the complete exegetical notes, see [014-insights.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/014-insights.md)):
+A deep literary and grammatical study reveals key features of the discourse. (For the complete exegetical notes, see [014-insights.md](014-insights.md)):
 
 * **The Manner of Love (*Houtōs*)**: The Greek adverb *οὕτως* denotes manner ("in this way") rather than magnitude ("so much"). John 3:16 defines the *way* God loved: He loved by giving. True love is verified by the costliness of its actions.
 * **The Double Meaning of Exaltation**: The Greek verb *hypsōthēnai* ("lifted up") is a literary double entendre. It refers to the physical lifting up of Christ on the cross and His exaltation to the right hand of the Father. For John, the cross is the hour of Christ's glorification.
@@ -156,7 +156,7 @@ A deep literary and grammatical study reveals key features of the discourse. (Fo
 ---
 
 ## 10. Practical Application
-Applying the theological weight of John 3:16 leads to real-life transformation. (For the complete application study, see [016-application.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/016-application.md)):
+Applying the theological weight of John 3:16 leads to real-life transformation. (For the complete application study, see [016-application.md](016-application.md)):
 
 * **Personal Security**: Reject the feelings of insignificance and condemnation in a broken world. Anchor your identity in the truth that the Father loved you to the point of giving His own Son for your rescue.
 * **Stepping Into the Light**: Emulate the transition of Nicodemus. Bring hidden areas of compromise, sin, and shame out of the shadows of secrecy into the light of confession and pastoral care (John 3:21).
@@ -169,7 +169,7 @@ Applying the theological weight of John 3:16 leads to real-life transformation. 
 ---
 
 ## 11. Devotional Reflection
-*(Grounding the passage in personal faith. Adopt the earnest tone of Billy Graham. For the complete devotional, see [017-devotion.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/017-devotion.md)):*
+*(Grounding the passage in personal faith. Adopt the earnest tone of Billy Graham. For the complete devotional, see [017-devotion.md](017-devotion.md)):*
 
 The Bible says, **“For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life”** (John 3:16, KJV). 
 
@@ -180,14 +180,14 @@ The cross is the measure of God's love for you. Right now, you face a decision. 
 ---
 
 ## 12. Prayer
-*(A scriptural pastoral prayer written in the first person. For the full prayer, see [018-prayer.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/018-prayer.md)):*
+*(A scriptural pastoral prayer written in the first person. For the full prayer, see [018-prayer.md](018-prayer.md)):*
 
 > *O Sovereign and Loving Father, we praise You as the God of infinite grace, whose love is the originating source of all our hope. We stand in awe of Your character—that You did not look upon our fallen world with indifference, but gave Your unique Son, Jesus Christ, for our rescue. We confess that we have often lived in the shadows of fear, seeking the safety of secret belief rather than walking openly in Your truth. Forgive our self-righteousness and our moral compromises. Thank You, Lord Jesus, for being willing to be lifted up on the cross to bear the judgment of our sins, taking away our condemnation. Holy Spirit, strengthen our faith, help us to walk openly in Your light, and use us as ambassadors of Your reconciling love in this broken world. In the precious and holy name of Jesus Christ, we pray. Amen.*
 
 ---
 
 ## 13. Discussion Questions
-*(Multi-tiered questions for small group reflection. For the complete list, see [019-questions.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/019-questions.md)):*
+*(Multi-tiered questions for small group reflection. For the complete list, see [019-questions.md](019-questions.md)):*
 
 ### Tier 1: Observation Questions
 1. Compare the KJV, ESV, and BSB translations of John 3:16. What terms are used to translate *monogenēs* and *zōē aiōnios*?
@@ -212,22 +212,22 @@ Through the instrument of persistent faith, believers are delivered from the def
 
 ## 15. Appendix: Individual Step Outputs
 For deeper detail, consult the individual step files generated during this study:
-* **Step 001 (Bible Versions)**: [001-bible.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/001-bible.md)
-* **Step 002 (Original & Interlinear)**: [002-original.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/002-original.md)
-* **Step 003 (Greek Morphology)**: [003-morphology.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/003-morphology.md)
-* **Step 004 (Thematic Cross-References)**: [004-xrefs.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/004-xrefs.md)
-* **Step 005 (Commentary Synthesis)**: [005-commentary.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/005-commentary.md)
-* **Step 006 (Lexicon Study)**: [006-lexicon.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/006-lexicon.md)
-* **Step 007 (Key Word Analysis)**: [007-keywords.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/007-keywords.md)
-* **Step 008 (Historical Context)**: [008-nt-context.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/008-nt-context.md)
-* **Step 009 (Structural Outline)**: [009-outline.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/009-outline.md)
-* **Step 010 (Thought Flow)**: [010-flow.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/010-flow.md)
-* **Step 011 (Theological Themes)**: [011-themes.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/011-themes.md)
-* **Step 012 (Redemptive Message)**: [012-theology.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/012-theology.md)
-* **Step 013 (Spiritual Meaning)**: [013-meaning.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/013-meaning.md)
-* **Step 014 (Exegetical Insights)**: [014-insights.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/014-insights.md)
-* **Step 015 (Canonical Context)**: [015-canon.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/015-canon.md)
-* **Step 016 (Life Application)**: [016-application.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/016-application.md)
-* **Step 017 (Devotion)**: [017-devotion.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/017-devotion.md)
-* **Step 018 (Pastoral Prayer)**: [018-prayer.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/018-prayer.md)
-* **Step 019 (Discussion Questions)**: [019-questions.md](file:///Users/admin/dev/antigravity_bible_agents/biblemate/2026-06-20-11-04-28_john_3_16_devotion_and_exegesis/019-questions.md)
+* **Step 001 (Bible Versions)**: [001-bible.md](001-bible.md)
+* **Step 002 (Original & Interlinear)**: [002-original.md](002-original.md)
+* **Step 003 (Greek Morphology)**: [003-morphology.md](003-morphology.md)
+* **Step 004 (Thematic Cross-References)**: [004-xrefs.md](004-xrefs.md)
+* **Step 005 (Commentary Synthesis)**: [005-commentary.md](005-commentary.md)
+* **Step 006 (Lexicon Study)**: [006-lexicon.md](006-lexicon.md)
+* **Step 007 (Key Word Analysis)**: [007-keywords.md](007-keywords.md)
+* **Step 008 (Historical Context)**: [008-nt-context.md](008-nt-context.md)
+* **Step 009 (Structural Outline)**: [009-outline.md](009-outline.md)
+* **Step 010 (Thought Flow)**: [010-flow.md](010-flow.md)
+* **Step 011 (Theological Themes)**: [011-themes.md](011-themes.md)
+* **Step 012 (Redemptive Message)**: [012-theology.md](012-theology.md)
+* **Step 013 (Spiritual Meaning)**: [013-meaning.md](013-meaning.md)
+* **Step 014 (Exegetical Insights)**: [014-insights.md](014-insights.md)
+* **Step 015 (Canonical Context)**: [015-canon.md](015-canon.md)
+* **Step 016 (Life Application)**: [016-application.md](016-application.md)
+* **Step 017 (Devotion)**: [017-devotion.md](017-devotion.md)
+* **Step 018 (Pastoral Prayer)**: [018-prayer.md](018-prayer.md)
+* **Step 019 (Discussion Questions)**: [019-questions.md](019-questions.md)
