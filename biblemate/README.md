@@ -1,0 +1,1 @@
+BibleMate Outputs are placed in this directory.
