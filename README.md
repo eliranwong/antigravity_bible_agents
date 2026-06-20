@@ -31,9 +31,9 @@ Leveraging the **Google Antigravity platform**, these tools are exposed natively
 
 ---
 
-## 🚀 The `/biblemate` Signature-Skill: Orchestrated Bible Study
+## 🚀 The `/biblemate` Signature Command: Orchestrated Bible Study
 
-The `/biblemate` command (backed by the [.agents/skills/biblemate](.agents/skills/biblemate) orchestration suite) is the **signature-skill** of this project. While individual slash commands perform specific exegesis tasks (like outline lookups or keyword analyses), `/biblemate` acts as a first-class Biblical scholar and orchestrator, running a fully automated, multi-phase research pipeline to produce publication-quality, deep-dive manuscripts.
+The `/biblemate` command (backed by the [.agents/skills/biblemate](.agents/skills/biblemate) orchestration suite) is the **signature command** of this project. While individual slash commands perform specific exegesis tasks (like outline lookups or keyword analyses), `/biblemate` acts as a first-class Biblical scholar and orchestrator, running a fully automated, multi-phase research pipeline to produce publication-quality, deep-dive manuscripts.
 
 ### Why it is so powerful for Bible Study:
 * **Phased Workflow**: It guides the AI assistant through 5 rigorous research phases—Planning, local database Data Retrieval, Analysis, Theological Synthesis, and pastoral/evangelistic Application.
@@ -108,7 +108,7 @@ graph TD
 
 ---
 
-## ⚡ The `/biblemate-super` Command: Dynamic & Goal-Oriented Orchestration
+## ⚡ The `/biblemate-super` Ultimate Command: Dynamic & Goal-Oriented Research & Orchestration
 
 The `/biblemate-super` command (backed by the [.agents/skills/biblemate-super](.agents/skills/biblemate-super) orchestration suite) is the **advanced, adaptive counterpart** to the standard `/biblemate` command. 
 
