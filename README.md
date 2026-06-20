@@ -64,8 +64,9 @@ These files are dynamically read by the respective retrievers on every execution
 
 To bring these powerful Bible study tools into a brand-new repository, follow these simple setup steps:
 
-1. **Copy the Configuration & Preferences Folders**:  
-   Copy the `.agents/` and `preferences/` folders from the root of this repository into the root of your new project. Google Antigravity will automatically discover the custom personas, skills, and workflows, while the `preferences/` folder preserves your default database preferences.
+1. **Copy Configuration & Preferences (Choose one method)**:
+   - **Method A - Git users (Recommended)**: **Fork** this repository on GitHub and `git clone` it. This is highly recommended because when you write your own studies, generate exports, and run the `/sync` command, all changes will be synchronized cleanly to your own personal remote repository.
+   - **Method B - Manual Copy**: Manually copy the `.agents/` and `preferences/` folders from the root of this repository into the root of your new project. Google Antigravity will automatically discover the custom personas, skills, and workflows, while the `preferences/` folder preserves your default database preferences.
 
 2. **Install `biblematedata` (for Bible Database Retrieval)**:  
    To enable local Scripture database lookups, you need to install the `biblematedata` package and initialize it:
