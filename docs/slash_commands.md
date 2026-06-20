@@ -1,6 +1,6 @@
 # Slash Commands & Workflows Reference Guide
 
-This guide details all 113 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
+This guide details all 114 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
 
 ---
 
@@ -95,6 +95,7 @@ These commands help manage the workspace files and synchronize changes with remo
 
 | Command | Description | Assigned Persona | Expected Input | Example |
 | :--- | :--- | :--- | :--- | :--- |
+| **`/biblemate`** | Runs a fully automated BibleMate AI study, orchestrating multiple study skills and tools to complete a detailed theological or exegetical request. | Biblical Content Interpreter | Detailed study request | `/biblemate "Write a sermon and exegesis on John 3:16"` |
 | **`/data`** | Lists all available versions of Bibles, commentaries, or lexicons by dynamically scanning storage folders. | Verse Scripter | Resource type (`bible`, `commentary`, or `lexicon`) | `/data bible` |
 | **`/sync`** | Stages, commits, and pushes all latest workspace changes to the remote repository. | Verse Scripter | Optional custom commit message | `/sync "Added sync command"` |
 | **`/md`** | Converts a file to markdown, or exports the last response/conversation to export/md. | Verse Scripter | Optional file path or export keyword (e.g., 'whole', 'conversation') | `/md export/docx/README.md` or `/md whole` |
