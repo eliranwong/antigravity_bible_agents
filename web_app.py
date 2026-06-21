@@ -183,8 +183,24 @@ class BibleMateApp:
         self.active_agent_running = False
         self.running_chat_task = None
         
+        # Slash commands auto-discovery
+        self.slash_commands = self.get_slash_commands()
+        
         # Log Hook Registration
         self.setup_logging_interceptor()
+
+    def get_slash_commands(self) -> list:
+        """Dynamically parses the .agents/workflows/ directory to retrieve available slash commands."""
+        commands = []
+        workflows_dir = '.agents/workflows'
+        if os.path.exists(workflows_dir):
+            try:
+                for f in os.listdir(workflows_dir):
+                    if f.endswith('.md'):
+                        commands.append('/' + f[:-3])
+            except Exception:
+                pass
+        return sorted(commands)
 
     def setup_logging_interceptor(self):
         # Store active event loop
@@ -754,12 +770,39 @@ class BibleMateApp:
         with ui.footer().classes('bg-slate-100/90 dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800 p-4 fixed bottom-0 left-0 right-0 z-10 backdrop-blur-md'):
             with ui.column().classes('w-full gap-1'):
                 with ui.row().classes('w-full items-end gap-3'):
-                    # Multi-line textarea for entry requests
-                    # We remove the custom text and background overrides so NiceGUI/Quasar naturally styles colors according to the active dark/light mode
-                    message_input = ui.textarea(
-                        label='Ask BibleMate AI',
-                        placeholder='Enter your study request (e.g., Write a devotion on Romans 8:28)...'
-                    ).props('outlined autogrow rows=2 input-class="text-slate-900 dark:text-slate-100"').classes('flex-grow rounded-xl text-slate-900 dark:text-slate-100')
+                    # Wrapper column for message input & autocomplete menu
+                    with ui.column().classes('flex-grow relative'):
+                        autocomplete_menu = None
+
+                        def select_command(cmd: str):
+                            message_input.value = cmd + ' '
+                            if autocomplete_menu:
+                                autocomplete_menu.close()
+                            message_input.run_method('focus')
+
+                        def handle_input_change(e):
+                            val = e.value or ""
+                            if val.startswith('/') and ' ' not in val:
+                                matches = [cmd for cmd in self.slash_commands if cmd.lower().startswith(val.lower())]
+                                if matches and autocomplete_menu:
+                                    autocomplete_menu.clear()
+                                    with autocomplete_menu:
+                                        for cmd in matches[:10]:
+                                            ui.menu_item(cmd, on_click=lambda c=cmd: select_command(c)).classes('text-xs font-mono py-1 px-3')
+                                    autocomplete_menu.open()
+                                elif autocomplete_menu:
+                                    autocomplete_menu.close()
+                            elif autocomplete_menu:
+                                autocomplete_menu.close()
+
+                        # Multi-line textarea for entry requests
+                        message_input = ui.textarea(
+                            label='Ask BibleMate AI',
+                            placeholder='Enter your study request (e.g., Write a devotion on Romans 8:28)...',
+                            on_change=handle_input_change
+                        ).props('outlined autogrow rows=2 input-class="text-slate-900 dark:text-slate-100"').classes('w-full rounded-xl text-slate-900 dark:text-slate-100')
+                        
+                        autocomplete_menu = ui.menu().props('fit no-parent-event anchor="top left" self="bottom left"')
                 
                     # Inline async sender bound to Client context to avoid RuntimeError
                     async def on_send_click():
