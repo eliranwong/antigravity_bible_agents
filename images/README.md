@@ -1,0 +1,1 @@
+Generated images are placed here.  Each filename begins with a timestamp and the image title, e.g. with a filename format of 'YYYY-MM-DD-HH-MM-SS_<image-title>.png' for the date and time of the image generation.
