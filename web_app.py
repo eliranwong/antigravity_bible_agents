@@ -143,10 +143,19 @@ class WebAppLogHandler(logging.Handler):
 
     def emit(self, record):
         try:
-            log_line = self.format(record)
-            self.callback(log_line)
+            # Check if this log record is relevant to google.antigravity
+            normalized_path = record.pathname.replace('\\', '/')
+            is_sdk_log = (
+                'google/antigravity' in normalized_path or 
+                record.name.startswith('google.antigravity') or 
+                (isinstance(record.msg, str) and 'RAW WS MSG:' in record.msg)
+            )
+            if is_sdk_log:
+                log_line = self.format(record)
+                self.callback(log_line)
         except Exception:
             pass
+
 
 # ---------------------------------------------------------
 # NiceGUI Web Application State & Layout
@@ -176,10 +185,28 @@ class BibleMateApp:
         self.setup_logging_interceptor()
 
     def setup_logging_interceptor(self):
+        # Store active event loop
+        try:
+            self.loop = asyncio.get_running_loop()
+        except RuntimeError:
+            try:
+                self.loop = asyncio.get_event_loop()
+            except RuntimeError:
+                self.loop = None
+
+        # Clean up any existing WebAppLogHandler to avoid duplicates
+        root_logger = logging.getLogger()
+        for h in list(root_logger.handlers):
+            if isinstance(h, WebAppLogHandler):
+                root_logger.removeHandler(h)
+        
         handler = WebAppLogHandler(self.handle_incoming_log)
         handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-        logging.getLogger('google.antigravity').addHandler(handler)
-        logging.getLogger('google.antigravity').setLevel(logging.INFO)
+        root_logger.addHandler(handler)
+        
+        # Ensure root logger is at INFO level to allow capture of SDK logs
+        if root_logger.level > logging.INFO:
+            root_logger.setLevel(logging.INFO)
 
     def handle_incoming_log(self, log_line: str):
         try:
@@ -188,11 +215,12 @@ class BibleMateApp:
             if len(self.terminal_logs) > 500:
                 self.terminal_logs.pop(0)
 
-            # Get main loop
+            # Get main event loop
             loop = getattr(self, 'loop', None)
-            if not loop:
+            if not loop or not loop.is_running():
                 try:
                     loop = asyncio.get_event_loop()
+                    self.loop = loop
                 except RuntimeError:
                     pass
 
@@ -389,9 +417,28 @@ class BibleMateApp:
                 system_rules += f"\n\nAdopt the following persona instructions:\n{PERSONAS_MAP[self.selected_persona]}"
             else:
                 system_rules += "\nYou have access to specialized personas. Rotate them dynamically depending on the research phase."
-                
+
             if self.selected_skill != 'Auto':
                 system_rules += f"\n\nCRITICAL TASK REQUIREMENT: You MUST use the local skill '{self.selected_skill}' to retrieve data and solve this request. Do not answer from memory."
+
+            # Always append workspace file rules so the agent saves to the correct location
+            system_rules += (
+                "\n\n## WORKSPACE FILE RULES (MANDATORY)"
+                "\nThe current working directory IS the repository root. All file output MUST be saved"
+                " into this workspace using RELATIVE paths only — never absolute paths."
+                "\n- Save ALL study outputs (outlines, sermons, devotionals, analyses, etc.) to the"
+                " `biblemate/` subdirectory."
+                "\n- Every output filename MUST be prefixed with a timestamp in the format"
+                " `YYYY-MM-DD-HH-MM-SS_` followed by a short descriptive name ending in `.md`."
+                " To get the current timestamp, run this command first:"
+                " `python3 -c \"import datetime; print(datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S'))\"`"
+                " then use the printed value as the prefix."
+                " Example filename: `biblemate/2026-06-21-22-09-00_hope_theological_study.md`."
+                "\n- Save generated images to the `images/` subdirectory (images already use timestamped filenames)."
+                "\n- NEVER tell the user a file has been saved unless you have actually written it to"
+                " one of these workspace directories in this session."
+                "\n- Do NOT write files to any artifact, brain, or temporary directory outside the workspace."
+            )
     
             sdk_model = MODELS_MAP.get(self.selected_model, 'gemini-3.5-flash')
             config = LocalAgentConfig(
@@ -448,6 +495,8 @@ class BibleMateApp:
             self.active_agent_running = False
             self.update_action_button(to_stop=False)
             try:
+                # Hide the progress console now that the agent is done
+                self.progress_container.set_visibility(False)
                 ui.notify("System Ready", group='agent_progress', type='positive', timeout=2000)
                 # Refresh file tree to show newly created output files
                 self.refresh_file_tree()
@@ -476,9 +525,9 @@ class BibleMateApp:
         try:
             self.chat_container.clear()
             self.terminal_logs.clear()
+            # Hide the progress console on a new conversation
+            self.progress_container.set_visibility(False)
             ui.notify("Conversation cleared. Starting afresh!", type='info')
-            # Reset progress notification
-            ui.notify("System Ready", group='agent_progress', type='positive', timeout=2000)
         except Exception as e:
             ui.notify(f"Error clearing conversation: {e}", type='warning')
 
@@ -561,9 +610,9 @@ class BibleMateApp:
                 with ui.tab_panel('chat').classes('w-full p-0 bg-transparent flex flex-col'):
                     self.chat_container = ui.column().classes('w-full flex-grow mb-6')
                     
-                    # Collapsible agent execution logger console
+                    # Collapsible agent execution logger console (hidden by default, shown only when agent is active)
                     with ui.column().classes('w-full mb-6 transition-all duration-300') as self.progress_container:
-                        self.progress_container.set_visibility(True)
+                        self.progress_container.set_visibility(False)
                         with ui.card().classes('w-full border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 p-4 rounded-xl shadow-inner'):
                             with ui.row().classes('w-full items-center gap-2 mb-2'):
                                 ui.spinner(size='sm', color='indigo')
@@ -598,7 +647,7 @@ class BibleMateApp:
                     # Multi-line textarea for entry requests
                     # We remove the custom text and background overrides so NiceGUI/Quasar naturally styles colors according to the active dark/light mode
                     message_input = ui.textarea(
-                        label='Ask BibleMate',
+                        label='Ask BibleMate AI',
                         placeholder='Enter your study request (e.g., Write a devotion on Romans 8:28)...'
                     ).props('outlined autogrow rows=2 input-class="text-slate-900 dark:text-slate-100"').classes('flex-grow rounded-xl text-slate-900 dark:text-slate-100')
                 
@@ -625,6 +674,9 @@ class BibleMateApp:
 # Initialize application UI
 app_instance = BibleMateApp()
 app_instance.build_ui()
+
+# Setup logging interceptor after uvicorn initializes on server startup to capture the active event loop
+app.on_startup(lambda: app_instance.setup_logging_interceptor())
 
 # Start server on default port 33377
 ui.run(
