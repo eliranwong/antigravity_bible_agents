@@ -177,6 +177,8 @@ class BibleMateApp:
         self.tool_display = None
         self.tool_output_display = None
         self.terminal_display = None
+        self.delete_button = None
+        self.selected_node_id = None
         self.terminal_logs = []
         self.active_agent_running = False
         self.running_chat_task = None
@@ -372,11 +374,93 @@ class BibleMateApp:
             except Exception as e:
                 ui.notify(f"Error loading file: {e}", type='negative')
 
+    def is_deletable(self, path: str) -> bool:
+        """Checks if a given path is allowed to be deleted by the user."""
+        if not path:
+            return False
+        clean_path = os.path.normpath(path).replace('\\', '/')
+        
+        # Explicitly protect root and direct parent folders
+        protected = {
+            '.', '', 'biblemate', 'export', 'export/md', 'export/docx', 'images',
+            'images/readme.md', 'images/readme'
+        }
+        if clean_path.lower() in protected or clean_path.startswith(('.', '..')):
+            return False
+            
+        # Must be strictly nested inside allowed directories
+        allowed_roots = ('biblemate/', 'export/md/', 'export/docx/', 'images/')
+        return any(clean_path.startswith(root) for root in allowed_roots)
+
+    def confirm_delete(self):
+        """Displays a confirmation dialog to delete the selected tree item."""
+        node_id = getattr(self, 'selected_node_id', None)
+        if not node_id or not self.is_deletable(node_id):
+            ui.notify("This item cannot be deleted.", type='warning')
+            return
+            
+        is_dir = os.path.isdir(os.path.join(WORKSPACE_DIR, node_id))
+        item_type = "folder" if is_dir else "file"
+        
+        with ui.dialog() as dialog, ui.card().classes('p-6 max-w-sm'):
+            ui.label('Confirm Deletion').classes('text-lg font-bold text-slate-900 dark:text-white mb-2')
+            ui.label(f'Are you sure you want to permanently delete the {item_type} "{os.path.basename(node_id)}"? This action cannot be undone.').classes('text-sm text-slate-600 dark:text-slate-400 mb-6')
+            with ui.row().classes('w-full justify-end gap-3'):
+                ui.button('Cancel', on_click=dialog.close).props('flat')
+                ui.button('Delete', color='red', on_click=lambda: self.perform_delete(node_id, dialog)).props('elevated')
+        dialog.open()
+
+    def perform_delete(self, node_id: str, dialog):
+        """Executes deletion of the verified file or folder."""
+        dialog.close()
+        full_path = os.path.join(WORKSPACE_DIR, node_id)
+        if not os.path.exists(full_path):
+            ui.notify("Item not found.", type='warning')
+            return
+            
+        try:
+            if os.path.isdir(full_path):
+                import shutil
+                shutil.rmtree(full_path)
+                ui.notify(f"Deleted folder: {os.path.basename(node_id)}", type='positive')
+            else:
+                os.remove(full_path)
+                ui.notify(f"Deleted file: {os.path.basename(node_id)}", type='positive')
+                
+            self.selected_node_id = None
+            if self.delete_button:
+                self.delete_button.set_visibility(False)
+            
+            # Clear reader view if deleted file was open
+            if self.reader_title.text == os.path.basename(node_id):
+                self.reader_title.set_text("No File Selected")
+                self.reader_container.clear()
+                with self.reader_container:
+                    ui.markdown('Select a file from the left sidebar tree to view it. New exegesis results are written directly to `biblemate/` and `export/`, and images to `images/`.').classes('text-slate-700 dark:text-slate-300')
+            
+            self.refresh_file_tree()
+        except Exception as e:
+            ui.notify(f"Error during deletion: {e}", type='negative')
+
+    def handle_tree_select(self, node_id: str):
+        self.selected_node_id = node_id
+        if node_id:
+            deletable = self.is_deletable(node_id)
+            if self.delete_button:
+                self.delete_button.set_visibility(deletable)
+            
+            # Open files in the Document Reader automatically
+            if os.path.isfile(os.path.join(WORKSPACE_DIR, node_id)):
+                self.handle_file_select(node_id)
+        else:
+            if self.delete_button:
+                self.delete_button.set_visibility(False)
+
     def refresh_file_tree(self):
         nodes = self.build_file_tree_nodes()
         self.file_tree.clear()
         with self.file_tree:
-            ui.tree(nodes=nodes, label_key='label', on_select=lambda e: self.handle_file_select(e.value))
+            ui.tree(nodes=nodes, label_key='label', on_select=lambda e: self.handle_tree_select(e.value))
         ui.notify("File tree refreshed!", type='info')
 
     def update_action_button(self, to_stop: bool):
@@ -575,7 +659,10 @@ class BibleMateApp:
         with ui.left_drawer(value=False).classes('bg-slate-50 dark:bg-slate-950 border-r border-slate-200 dark:border-slate-900 p-4') as self.left_drawer:
             with ui.row().classes('w-full justify-between items-center mb-4'):
                 ui.label('Saved Studies').classes('text-md font-bold text-slate-800 dark:text-slate-200')
-                ui.button(icon='refresh', on_click=self.refresh_file_tree).props('flat round size=sm').classes('text-slate-600 dark:text-slate-400')
+                with ui.row().classes('items-center gap-1'):
+                    self.delete_button = ui.button(icon='delete', on_click=self.confirm_delete).props('flat round size=sm color=red').classes('text-rose-500')
+                    self.delete_button.set_visibility(False)
+                    ui.button(icon='refresh', on_click=self.refresh_file_tree).props('flat round size=sm').classes('text-slate-600 dark:text-slate-400')
             
             # Dynamic Container
             self.file_tree = ui.column().classes('w-full')
@@ -681,17 +768,18 @@ class BibleMateApp:
         message_input.value = ''
         await self.execute_agent_chat(query)
 
-# Initialize application UI
-app_instance = BibleMateApp()
-app_instance.build_ui()
+if __name__ == '__main__':
+    # Initialize application UI
+    app_instance = BibleMateApp()
+    app_instance.build_ui()
 
-# Setup logging interceptor after uvicorn initializes on server startup to capture the active event loop
-app.on_startup(lambda: app_instance.setup_logging_interceptor())
+    # Setup logging interceptor after uvicorn initializes on server startup to capture the active event loop
+    app.on_startup(lambda: app_instance.setup_logging_interceptor())
 
-# Start server on default port 33377
-ui.run(
-    title='BibleMate App',
-    port=33377,
-    reload=False,  # Disable reload for background execution safety
-    show=False     # Do not open a browser window automatically on server start
-)
+    # Start server on default port 33377
+    ui.run(
+        title='BibleMate App',
+        port=33377,
+        reload=False,  # Disable reload for background execution safety
+        show=False     # Do not open a browser window automatically on server start
+    )
