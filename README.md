@@ -149,6 +149,8 @@ All agentic configurations are self-contained under the `.agents/` folder at the
 
 In addition to the native Antigravity IDE integration, this workspace ships with a **self-contained browser-based web application** ([`web_app.py`](web_app.py)) built with [NiceGUI](https://nicegui.io). It lets you run the full suite of BibleMate AI agents, monitor live execution, browse generated study reports, and view AI-generated biblical images — all from any modern web browser on your local machine.
 
+<img width="1511" height="860" alt="Image" src="https://github.com/user-attachments/assets/c76d8e4b-5188-4f02-92aa-79d985f68523" />
+
 ### Key Features
 
 - **Chat Workspace** — submit study requests and receive beautifully rendered Markdown responses streamed in real time
