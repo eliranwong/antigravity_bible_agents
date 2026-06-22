@@ -5,6 +5,8 @@ The **Antigravity BibleMate Web App** is a self-contained, browser-based control
 > **Main entry point:** [`web_app.py`](../web_app.py)  
 > **Default URL:** [http://localhost:33377](http://localhost:33377)
 
+<img width="1511" height="860" alt="Image" src="https://github.com/user-attachments/assets/c76d8e4b-5188-4f02-92aa-79d985f68523" />
+
 ---
 
 ## Table of Contents
