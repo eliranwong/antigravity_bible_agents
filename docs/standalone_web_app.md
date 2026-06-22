@@ -121,23 +121,32 @@ The interface is divided into several key areas:
 | **Chat / Reader Tabs** | Switches between the chat workspace and the document reader |
 | **⚙ Settings** | Toggles the right-side settings drawer |
 
+### Left Sidebar Drawer (File Tree)
+
+Displays all files in your workspace. It features context-aware controls:
+- **↻ Refresh Button**: Refreshes the file tree dynamically to load new files.
+- **🗑 Delete Button (Red)**: Displays when a deletable file or folder is selected. Prompts with a confirmation modal. Folder/file deletion is strictly restricted to nested workspace contents under `biblemate/`, `images/`, `export/md/`, and `export/docx/`. All `README.md` files (case-insensitive) and the `docs/` folder/documentation files are protected and cannot be deleted.
+- **📥 Export Button (Blue)**: Displays only when a Markdown (`*.md`) file is selected. Clicking this button converts the markdown file into a Word Document (`.docx`) using `pandoc`. The exported file is named with the format `YYYY-MM-DD-HH-MM-SS_<original_name>.docx` and saved in `export/docx/`.
+
 ### Chat Workspace (Default Tab)
 
 The primary area for submitting study requests and viewing agent responses.
 
-- **User messages** appear as right-aligned indigo bubbles
-- **Agent responses** are rendered as formatted Markdown on the left
-- The **Agent Progress Console** (expandable panels) shows:
-  - **Agent Thinking Monologue** — real-time reasoning/planning steps
-  - **Currently Executed Tool/Skill** — the active script and its stdout output
-  - **System Logs** — a live terminal window with logger events
+- **User messages** appear as right-aligned bubbles.
+- **Agent responses** are rendered as formatted Markdown on the left.
+- **Slash Command Autocomplete Dropdown**: When typing a slash (`/`) inside the input bar (only if the Enforced Skill is set to `'Auto'`), a scrollable autocomplete dropdown displays matching commands in real time. Clicking an option inserts it and focuses the input.
+- **Ctrl+S / Cmd+S Send Shortcut**: Pressing `Ctrl+S` (or `Cmd+S` on Mac) while typing in the textarea immediately sends the request, avoiding browser save dialogs.
+- **Agent Progress Console** (expandable panels) shows:
+  - **Agent Thinking Monologue** — real-time reasoning/planning steps.
+  - **Currently Executed Tool/Skill** — the active script and its stdout output.
+  - **System Logs** — a live terminal window with logger events.
 
 ### Document Reader Tab
 
-Displays the contents of any file selected from the left-hand file tree. Supports:
-
-- **Markdown files** (`.md`) — rendered with full formatting
-- **Image files** (`.png`, `.jpg`, `.jpeg`) — displayed inline with rounded styling
+Displays selected workspace files. Supports:
+- **Markdown files** (`.md`) — rendered with full formatting.
+- **Image files** (`.png`, `.jpg`, `.jpeg`) — displayed inline.
+- **DOCX files** (`.docx`) — selecting a `.docx` file triggers a client-side download instead of viewing.
 
 ---
 
@@ -221,23 +230,32 @@ After generation completes:
 
 ## 7. File Tree & Document Reader
 
-The left drawer contains a dynamic file tree showing all saved study outputs and generated images, organized into three root folders:
+The left drawer contains a dynamic file tree showing all saved study outputs, generated images, and documentation, organized into four root folders:
 
 | Folder | Contents |
 | :--- | :--- |
 | `biblemate/` | Markdown study outputs saved by BibleMate skills |
 | `export/` | Exported `.md` and `.docx` files |
 | `images/` | AI-generated Bible images (`.png`, `.jpg`, `.jpeg`) |
+| `docs/` | System setup and usage documentation |
 
 ### Selecting a File
 
-- Click any **`.md`** file to open and render it in the Document Reader tab
-- Click any **image file** to display it inline in the Document Reader tab
-- The app switches to the **Reader tab** automatically upon selection
+- Click any **`.md`** file (e.g. from `biblemate/`, `export/md/`, or `docs/`) to open and render it in the Document Reader tab.
+- Click any **image file** to display it inline in the Document Reader tab.
+- Click any **`.docx`** file to trigger a client-side download automatically.
+- Selecting a file switches the app to the **Reader tab** (except for `.docx` files, which download directly).
+
+### Protected Folders and Files
+
+To prevent accidental data loss, the web application explicitly blocks deletion of:
+- Root directories (`biblemate`, `images`, `export`, `docs`)
+- Any `README.md` file (case-insensitive) in any directory
+- Any file or subdirectory inside the `docs/` folder
 
 ### Refreshing the Tree
 
-After a study run, click the **↻** button in the drawer header to reload the tree and see newly generated files.
+After a study run or export, click the **↻** button in the drawer header to reload the tree and see newly generated files.
 
 ---
 
