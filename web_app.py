@@ -782,7 +782,7 @@ class BibleMateApp:
 
                         def handle_input_change(e):
                             val = e.value or ""
-                            if val.startswith('/') and ' ' not in val:
+                            if self.selected_skill == 'Auto' and val.startswith('/') and ' ' not in val:
                                 matches = [cmd for cmd in self.slash_commands if cmd.lower().startswith(val.lower())]
                                 if matches and autocomplete_menu:
                                     autocomplete_menu.clear()
@@ -807,6 +807,10 @@ class BibleMateApp:
                     # Inline async sender bound to Client context to avoid RuntimeError
                     async def on_send_click():
                         await self.handle_send(message_input)
+
+                    # Bind Control+S and Command+S keyboard shortcuts to send the request
+                    message_input.on('keydown.ctrl.s.prevent', on_send_click)
+                    message_input.on('keydown.meta.s.prevent', on_send_click)
                     
                     # Send Button
                     with ui.button(icon='send', on_click=on_send_click).props('round size=lg color=indigo').classes('shadow-md hover:scale-105 transition-transform mb-1') as self.action_button:
