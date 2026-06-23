@@ -174,7 +174,7 @@ All slash commands from the `.agents/workflows/` directory are fully supported i
 /search love+mercy in NET
 ```
 
-> **See Also:** [`docs/slash_commands.md`](slash_commands.md) for the complete reference of all 121 commands.
+> **See Also:** [`docs/slash_commands.md`](slash_commands.md) for the complete reference of all 120 commands.
 
 ### Direct Retrieval Commands
 

@@ -1,6 +1,6 @@
 # Slash Commands & Workflows Reference Guide
 
-This guide details all 121 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
+This guide details all 120 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
 
 ---
 

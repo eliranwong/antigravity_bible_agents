@@ -233,10 +233,9 @@ Use `--save-final-response` to save the final deliverable as `NNN-final_response
 | `ot-context` / `nt-context` | Historical and cultural context |
 | `ot-highlights` / `nt-highlights` | Key highlights and summaries |
 | `character` | Biblical character biographical study |
-| `location` | Biblical location study |
+| `locations` | Coordinates, maps, etymological details, and historical/geographical/theological significance of Bible locations |
 | `chronology` | Timeline and historical chronological study |
 | `names` | Study of personal/place name meanings |
-| `locations` | Coordinates, maps, and etymological details of a location |
 
 ### Theological Skills (Phase 3 — synthesize doctrine and theology)
 | Skill | Purpose |
@@ -300,10 +299,9 @@ Select skills based on the classified study type. **Required** skills must appea
 | `bible` (key passages) | `flow` |
 | `introduce-book` | `ot-context` or `nt-context` |
 | `outline` | `character` |
-| `canon` | `location` |
+| `canon` | `locations` |
 | `themes` | `chapter-summary` (key chapters) |
 | — | `chronology` |
-| — | `locations` |
 
 ### Topical Study
 > e.g., "Study the topic of grace", "What does the Bible say about suffering?"
