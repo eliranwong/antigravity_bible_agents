@@ -46,8 +46,12 @@ def get_best_match(query, locations_dict):
     partials = []
     for loc_name in locations_dict:
         loc_lower = loc_name.lower()
-        if query_clean in loc_lower or loc_lower in query_clean:
+        if query_clean in loc_lower:
             partials.append(loc_name)
+        elif loc_lower in query_clean:
+            query_words = re.split(r'[\s\-/]', query_clean)
+            if loc_lower in query_words or len(loc_lower) >= 4:
+                partials.append(loc_name)
     if len(partials) == 1:
         return partials[0]
         
