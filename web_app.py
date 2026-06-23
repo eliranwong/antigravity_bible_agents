@@ -400,7 +400,7 @@ class BibleMateApp:
                             content = f.read()
                         ui.markdown(content).classes('text-slate-700 dark:text-slate-300')
                     elif is_image:
-                        web_path = f"/images/{os.path.basename(node_id)}"
+                        web_path = f"/{node_id}"
                         ui.image(web_path).classes('w-full max-w-2xl mx-auto rounded-lg shadow-lg border border-slate-200 dark:border-slate-800')
                 
                 ui.notify(f"Loaded: {os.path.basename(node_id)}", type='positive')
@@ -419,6 +419,10 @@ class BibleMateApp:
             
         # Protect the docs folder and any files in it
         if clean_path.lower() == 'docs' or clean_path.lower().startswith('docs/'):
+            return False
+            
+        # Protect images/Timelines folder and its contents
+        if clean_path.lower() == 'images/timelines' or clean_path.lower().startswith('images/timelines/'):
             return False
             
         # Explicitly protect root and direct parent folders
