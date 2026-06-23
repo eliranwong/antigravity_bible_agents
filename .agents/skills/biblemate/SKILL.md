@@ -236,6 +236,7 @@ Use `--save-final-response` to save the final deliverable as `NNN-final_response
 | `location` | Biblical location study |
 | `chronology` | Timeline and historical chronological study |
 | `names` | Study of personal/place name meanings |
+| `locations` | Coordinates, maps, and etymological details of a location |
 
 ### Theological Skills (Phase 3 — synthesize doctrine and theology)
 | Skill | Purpose |
@@ -289,6 +290,7 @@ Select skills based on the classified study type. **Required** skills must appea
 | `insights` | `prayer` |
 | — | `chronology` |
 | — | `names` |
+| — | `locations` |
 
 ### Book Study
 > e.g., "Introduce the book of Romans", "Overview of Genesis"
@@ -301,6 +303,7 @@ Select skills based on the classified study type. **Required** skills must appea
 | `canon` | `location` |
 | `themes` | `chapter-summary` (key chapters) |
 | — | `chronology` |
+| — | `locations` |
 
 ### Topical Study
 > e.g., "Study the topic of grace", "What does the Bible say about suffering?"
@@ -325,6 +328,7 @@ Select skills based on the classified study type. **Required** skills must appea
 | `application` | `questions` |
 | `prayer` | `chronology` |
 | — | `names` |
+| — | `locations` |
 
 ---
 

@@ -22,11 +22,11 @@ MINIMUM_COVERAGE = {
     "passage": {
         "required": ["bible", "original", "keywords", "commentary", "xrefs", "themes", "insights"],
         "recommended": ["lexicon", "morphology", "flow", "application", "devotion", "prayer",
-                         "interlinear", "ot-context", "nt-context", "chronology", "names"],
+                         "interlinear", "ot-context", "nt-context", "chronology", "names", "locations"],
     },
     "book": {
         "required": ["bible", "introduce-book", "outline", "canon", "themes"],
-        "recommended": ["flow", "ot-context", "nt-context", "character", "location", "chapter-summary", "chronology"],
+        "recommended": ["flow", "ot-context", "nt-context", "character", "location", "chapter-summary", "chronology", "locations"],
     },
     "topical": {
         "required": ["topic", "quotes", "search", "themes", "bible"],
@@ -34,7 +34,7 @@ MINIMUM_COVERAGE = {
     },
     "sermon": {
         "required": ["bible", "commentary", "keywords", "sermon", "application", "prayer"],
-        "recommended": ["insights", "themes", "original", "flow", "questions", "devotion", "chronology", "names"],
+        "recommended": ["insights", "themes", "original", "flow", "questions", "devotion", "chronology", "names", "locations"],
     },
 }
 
@@ -54,6 +54,7 @@ MIN_CONTENT_LENGTH = {
     "chronology": 800,
     "names": 600,
     "daily-read": 500,
+    "locations": 800,
     "default": 400,
 }
 
@@ -524,9 +525,9 @@ def validate_plan(folder_path, study_type=None):
             "desc": "Needs at least one scripture retrieval step using `bible` to avoid hallucinations."
         },
         "Textual & Original Language Analysis": {
-            "skills": ["original", "interlinear", "keywords", "lexicon", "morphology", "commentary", "xrefs", "search", "chronology", "names"],
+            "skills": ["original", "interlinear", "keywords", "lexicon", "morphology", "commentary", "xrefs", "search", "chronology", "names", "locations"],
             "passed": False,
-            "desc": "Recommended to have analytical steps like word studies, commentary checks, cross-references, original language lookups, chronology, or biblical names analysis."
+            "desc": "Recommended to have analytical steps like word studies, commentary checks, cross-references, original language lookups, chronology, biblical names, or locations analysis."
         },
         "Theological Synthesis": {
             "skills": ["themes", "theology", "meaning", "canon", "insights", "topic"],

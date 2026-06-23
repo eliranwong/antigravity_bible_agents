@@ -1,6 +1,6 @@
 # Slash Commands & Workflows Reference Guide
 
-This guide details all 120 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
+This guide details all 121 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
 
 ---
 
@@ -38,6 +38,7 @@ These commands locate the scripture within its historical-cultural setting and i
 | **`/nt-highlights`** | Outlines major historical events, covenants, and highlights in a NT text. | NT Bible Scholar | A NT passage | `/nt-highlights Matthew 2` |
 | **`/ot-highligths`** | *Compatibility duplicate of `/ot-highlights`.* | OT Bible Scholar | An OT passage | `/ot-highligths Genesis 15` |
 | **`/chronology`** | Expounds biblical timelines and event dates using local chronology datasets. | OT Bible Scholar (OT) / NT Bible Scholar (NT) | A chronological event, king, or character name | `/chronology Solomon reign` |
+| **`/locations`** | Retrieves geographical coordinates, map links, and descriptions of a Bible location. | OT Bible Scholar (OT) / NT Bible Scholar (NT) / Biblical Linguistic Analyst | A bible location name | `/locations Jerusalem` |
 
 ---
 
