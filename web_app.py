@@ -179,6 +179,9 @@ class BibleMateApp:
         self.terminal_display = None
         self.delete_button = None
         self.export_button = None
+        self.edit_button = None
+        self.add_file_button = None
+        self.add_folder_button = None
         self.selected_node_id = None
         self.terminal_logs = []
         self.active_agent_running = False
@@ -310,47 +313,52 @@ class BibleMateApp:
         return None
 
     def build_file_tree_nodes(self):
-        """Recursively builds the dictionary hierarchy for ui.tree representing markdown files."""
-        def add_to_tree(path_parts, current_nodes, full_path):
-            if not path_parts:
-                return
-            part = path_parts[0]
-            found_node = None
-            for node in current_nodes:
-                if node['label'] == part:
-                    found_node = node
-                    break
-            if not found_node:
-                found_node = {
-                    'id': full_path if len(path_parts) == 1 else full_path.split(part)[0] + part,
-                    'label': part
+        """Recursively builds the dictionary hierarchy for ui.tree representing files and directories."""
+        def build_node(rel_path):
+            full_path = os.path.join(WORKSPACE_DIR, rel_path)
+            basename = os.path.basename(rel_path)
+            if os.path.isdir(full_path):
+                children = []
+                try:
+                    for entry in os.listdir(full_path):
+                        if entry.startswith('.'):
+                            continue
+                        child_rel = os.path.join(rel_path, entry)
+                        child_node = build_node(child_rel)
+                        if child_node:
+                            children.append(child_node)
+                except Exception:
+                    pass
+                return {
+                    'id': rel_path.replace('\\', '/'),
+                    'label': basename if basename else rel_path,
+                    'children': children
                 }
-                if len(path_parts) > 1:
-                    found_node['children'] = []
-                current_nodes.append(found_node)
-            if len(path_parts) > 1:
-                add_to_tree(path_parts[1:], found_node['children'], full_path)
+            else:
+                normalized = rel_path.replace('\\', '/')
+                parts = normalized.split('/')
+                top_folder = parts[0]
+                is_valid = False
+                if top_folder == 'images':
+                    is_valid = basename.lower().endswith(('.png', '.jpg', '.jpeg', '.md'))
+                elif top_folder == 'export':
+                    is_valid = basename.lower().endswith(('.md', '.docx'))
+                elif top_folder in ('docs', 'biblemate', 'notes'):
+                    is_valid = basename.endswith('.md')
+                
+                if is_valid:
+                    return {
+                        'id': rel_path.replace('\\', '/'),
+                        'label': basename
+                    }
+                return None
 
         nodes = []
-        for folder in ['biblemate', 'images', 'export', 'docs']:
+        for folder in ['biblemate', 'images', 'export', 'docs', 'notes']:
             if os.path.exists(folder):
-                folder_node = {'id': folder, 'label': folder, 'children': []}
-                nodes.append(folder_node)
-                for root, dirs, files in os.walk(folder):
-                    for file in files:
-                        is_valid = False
-                        normalized_root = root.replace('\\', '/')
-                        if folder == 'images':
-                            is_valid = file.lower().endswith(('.png', '.jpg', '.jpeg'))
-                        elif folder == 'export' and 'export/docx' in normalized_root:
-                            is_valid = file.lower().endswith('.docx')
-                        else:
-                            is_valid = file.endswith('.md')
-                        if is_valid:
-                            full_file_path = os.path.join(root, file)
-                            rel_path = os.path.relpath(full_file_path, start=WORKSPACE_DIR)
-                            parts = rel_path.split(os.sep)
-                            add_to_tree(parts[1:], folder_node['children'], rel_path)
+                node = build_node(folder)
+                if node:
+                    nodes.append(node)
 
         def sort_nodes(nodes_list, reverse=False):
             nodes_list.sort(key=lambda x: x['label'], reverse=reverse)
@@ -359,7 +367,6 @@ class BibleMateApp:
                     child_reverse = node['id'].startswith('biblemate')
                     sort_nodes(node['children'], reverse=child_reverse)
 
-        # Sort the folder tree: top-level is alphabetical, items under biblemate are reversed (newest first)
         sort_nodes(nodes, reverse=False)
         return nodes
 
@@ -417,13 +424,13 @@ class BibleMateApp:
         # Explicitly protect root and direct parent folders
         protected = {
             '.', '', 'biblemate', 'export', 'export/md', 'export/docx', 'images',
-            'images/readme.md', 'images/readme'
+            'images/readme.md', 'images/readme', 'notes'
         }
         if clean_path.lower() in protected or clean_path.startswith(('.', '..')):
             return False
             
         # Must be strictly nested inside allowed directories
-        allowed_roots = ('biblemate/', 'export/md/', 'export/docx/', 'images/')
+        allowed_roots = ('biblemate/', 'export/', 'images/', 'notes/')
         return any(clean_path.startswith(root) for root in allowed_roots)
 
     def confirm_delete(self):
@@ -466,6 +473,12 @@ class BibleMateApp:
                 self.delete_button.set_visibility(False)
             if self.export_button:
                 self.export_button.set_visibility(False)
+            if self.edit_button:
+                self.edit_button.set_visibility(False)
+            if self.add_file_button:
+                self.add_file_button.set_visibility(False)
+            if self.add_folder_button:
+                self.add_folder_button.set_visibility(False)
             
             # Clear reader view if deleted file was open
             if self.reader_title.text == os.path.basename(node_id):
@@ -519,6 +532,109 @@ class BibleMateApp:
         except Exception as e:
             ui.notify(f"Error during export: {e}", type='negative')
 
+    def start_edit(self):
+        node_id = getattr(self, 'selected_node_id', None)
+        if not node_id or not node_id.lower().endswith('.md'):
+            ui.notify("No markdown file selected for editing.", type='warning')
+            return
+            
+        file_path = os.path.join(WORKSPACE_DIR, node_id)
+        if not os.path.exists(file_path):
+            ui.notify("File not found.", type='warning')
+            return
+            
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+                
+            self.main_tabs.set_value('reader')
+            self.reader_title.set_text(f"Editing: {os.path.basename(node_id)}")
+            self.reader_container.clear()
+            
+            with self.reader_container:
+                # Textarea for editing the markdown content
+                editor = ui.textarea(
+                    value=content,
+                    label='Edit Content (Markdown)'
+                ).props('outlined autogrow input-class="font-mono text-slate-900 dark:text-slate-100"').classes('w-full min-h-[400px] mb-4 text-slate-900 dark:text-slate-100')
+                
+                with ui.row().classes('w-full gap-4'):
+                    ui.button('Save', icon='save', color='green', on_click=lambda: self.save_edit(node_id, editor.value)).props('elevated')
+                    ui.button('Cancel', icon='cancel', color='grey', on_click=lambda: self.handle_file_select(node_id)).props('flat')
+                    
+            ui.notify("Editor opened", type='info')
+        except Exception as e:
+            ui.notify(f"Error opening editor: {e}", type='negative')
+
+    def save_edit(self, node_id: str, new_content: str):
+        file_path = os.path.join(WORKSPACE_DIR, node_id)
+        try:
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            ui.notify(f"Successfully saved {os.path.basename(node_id)}", type='positive')
+            self.handle_file_select(node_id)
+        except Exception as e:
+            ui.notify(f"Error saving file: {e}", type='negative')
+
+    def prompt_create_item(self, is_folder: bool):
+        parent_dir = getattr(self, 'selected_node_id', 'notes')
+        if not parent_dir:
+            parent_dir = 'notes'
+            
+        full_parent_path = os.path.join(WORKSPACE_DIR, parent_dir)
+        if not os.path.isdir(full_parent_path):
+            parent_dir = os.path.dirname(parent_dir)
+            full_parent_path = os.path.join(WORKSPACE_DIR, parent_dir)
+            
+        item_type = "Folder" if is_folder else "File"
+        
+        with ui.dialog() as dialog, ui.card().classes('p-6 w-80'):
+            ui.label(f'Add New {item_type}').classes('text-lg font-bold mb-2')
+            ui.label(f'Inside: {parent_dir}').classes('text-xs text-slate-500 mb-4')
+            name_input = ui.input(f'{item_type} Name').classes('w-full mb-6')
+            
+            with ui.row().classes('w-full justify-end gap-3'):
+                ui.button('Cancel', on_click=dialog.close).props('flat')
+                ui.button('Create', on_click=lambda: self.create_item(parent_dir, name_input.value, is_folder, dialog)).props('elevated')
+        dialog.open()
+
+    def create_item(self, parent_dir: str, name: str, is_folder: bool, dialog):
+        dialog.close()
+        name = name.strip()
+        if not name:
+            ui.notify("Name cannot be empty.", type='warning')
+            return
+            
+        if not is_folder and not name.lower().endswith('.md'):
+            name += '.md'
+            
+        target_path = os.path.join(WORKSPACE_DIR, parent_dir, name)
+        
+        # Verify path security
+        normalized_target = os.path.normpath(target_path).replace('\\', '/')
+        notes_root = os.path.normpath(os.path.join(WORKSPACE_DIR, 'notes')).replace('\\', '/')
+        if not normalized_target.startswith(notes_root):
+            ui.notify("Invalid path target.", type='negative')
+            return
+            
+        if os.path.exists(target_path):
+            ui.notify(f"Item '{name}' already exists.", type='warning')
+            return
+            
+        try:
+            if is_folder:
+                os.makedirs(target_path, exist_ok=True)
+                ui.notify(f"Folder '{name}' created successfully.", type='positive')
+            else:
+                os.makedirs(os.path.dirname(target_path), exist_ok=True)
+                with open(target_path, 'w', encoding='utf-8') as f:
+                    f.write(f"# {name[:-3]}\n\n")
+                ui.notify(f"File '{name}' created successfully.", type='positive')
+                
+            self.refresh_file_tree()
+        except Exception as e:
+            ui.notify(f"Error creating item: {e}", type='negative')
+
     def handle_tree_select(self, node_id: str):
         self.selected_node_id = node_id
         if node_id:
@@ -531,6 +647,16 @@ class BibleMateApp:
             if self.export_button:
                 self.export_button.set_visibility(is_md)
             
+            if self.edit_button:
+                self.edit_button.set_visibility(is_md and deletable)
+                
+            is_dir = os.path.isdir(os.path.join(WORKSPACE_DIR, node_id))
+            is_notes = (node_id == 'notes' or node_id.startswith('notes/'))
+            if self.add_file_button:
+                self.add_file_button.set_visibility(is_dir and is_notes)
+            if self.add_folder_button:
+                self.add_folder_button.set_visibility(is_dir and is_notes)
+            
             # Open files in the Document Reader automatically
             if is_file:
                 self.handle_file_select(node_id)
@@ -539,6 +665,12 @@ class BibleMateApp:
                 self.delete_button.set_visibility(False)
             if self.export_button:
                 self.export_button.set_visibility(False)
+            if self.edit_button:
+                self.edit_button.set_visibility(False)
+            if self.add_file_button:
+                self.add_file_button.set_visibility(False)
+            if self.add_folder_button:
+                self.add_folder_button.set_visibility(False)
 
     def refresh_file_tree(self):
         nodes = self.build_file_tree_nodes()
@@ -764,6 +896,21 @@ class BibleMateApp:
                     self.export_button.set_visibility(False)
                     with self.export_button:
                         ui.tooltip('Export to DOCX')
+                        
+                    self.edit_button = ui.button(icon='edit', on_click=self.start_edit).props('flat round size=sm color=green').classes('text-emerald-500')
+                    self.edit_button.set_visibility(False)
+                    with self.edit_button:
+                        ui.tooltip('Edit Markdown File')
+                        
+                    self.add_file_button = ui.button(icon='note_add', on_click=lambda: self.prompt_create_item(is_folder=False)).props('flat round size=sm color=indigo').classes('text-indigo-500')
+                    self.add_file_button.set_visibility(False)
+                    with self.add_file_button:
+                        ui.tooltip('Add File')
+                        
+                    self.add_folder_button = ui.button(icon='create_new_folder', on_click=lambda: self.prompt_create_item(is_folder=True)).props('flat round size=sm color=indigo').classes('text-indigo-500')
+                    self.add_folder_button.set_visibility(False)
+                    with self.add_folder_button:
+                        ui.tooltip('Add Folder')
                         
                     ui.button(icon='refresh', on_click=self.refresh_file_tree).props('flat round size=sm').classes('text-slate-600 dark:text-slate-400')
             

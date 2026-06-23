@@ -136,10 +136,12 @@ All agentic configurations are self-contained under the `.agents/` folder, while
 │   └── workflows/        # Parameterized slash command workflows
 ├── biblemate/            # Saved study outputs, sermons, outlines, and devotions
 ├── images/               # Generated biblical illustrations and visual aids
+├── notes/                # User-created notes, subfolders, and documents
 └── export/               # Exported Word documents (.docx) and bundles
 ```
 
 For in-depth details on file management and study output locations, see the **[Study Outputs Reference Guide](docs/study_outputs.md)**.
+
 
 ---
 
@@ -154,10 +156,13 @@ In addition to the native Antigravity IDE integration, this workspace ships with
 - **Chat Workspace** — submit study requests and receive beautifully rendered Markdown responses streamed in real time
 - **Live Agent Console** — watch the agent's thinking monologue, active tool calls, and system logs as they happen
 - **Stop Button** — cancel any running agent mid-execution with one click
-- **File Tree & Document Reader** — browse and open saved Markdown study outputs and AI-generated images directly in the browser
+- **File Tree & Document Reader** — browse and open saved Markdown study outputs, notes, and AI-generated images directly in the browser
+- **Inline Markdown Editor** — edit any deletable markdown study outputs or notes right from the web browser with Save/Cancel capability
+- **Notes Management** — select the `notes` directory to add files and subfolders on demand, with empty folders displaying instantly in the tree
 - **Image Generation (`/image`)** — generate Bible-related images on demand; files are saved to `images/` with a timestamped filename
 - **Settings Drawer** — switch AI models (Gemini 3.5 Flash/Pro, 2.0 Flash, 1.5 Pro/Flash), select a persona, or enforce a specific skill
 - **Dark / Light Mode** — fully themeable UI
+
 
 ### Quick Launch
 
@@ -226,8 +231,8 @@ To utilize the core capabilities of the local Bible study tools (such as databas
 If you wish to bring these custom Bible study agents and tools into a **different, brand-new repository** of your own, follow these steps:
 
 1. **Copy Configuration & Preferences (Choose one method)**:
-   - **Method A - Git users (Recommended)**: **Fork** this repository on GitHub and `git clone` it. This is highly recommended because when you write your own studies, generate exports, and run the `/sync` command, all changes will be synchronized cleanly to your own personal remote repository.
-   - **Method B - Manual Copy (Zip File)**: Download [manual_setup.zip](https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip) into the root of your new project and extract it:
+   - **Method A - Git users (Recommended for developers)**: **Fork** this repository on GitHub and `git clone` it. This is highly recommended because when you write your own studies, generate exports, and run the `/sync` command, all changes will be synchronized cleanly to your own personal remote repository.
+   - **Method B - Download (Zip File)**: Download [manual_setup.zip](https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip) into the root of your new project and extract it:
       * **Via Terminal (Recommended)**: Run the command for your operating system in your project root to download, extract, and clean up:
         * **macOS / Linux**:
           ```bash

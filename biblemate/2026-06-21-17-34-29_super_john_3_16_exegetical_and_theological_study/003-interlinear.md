@@ -1,2 +1,0 @@
-**John 3:16 (OHGBI)**
-ΟὕτωςThus γὰρfor ἠγάπησενloved ὁ- ΘεὸςGod τὸνthe κόσμονworld, ὥστεthat τὸνthe ΥἱὸνSon, τὸνthe μονογενῆonly begotten, ἔδωκενHe gave, ἵναso that πᾶςeveryone ὁ- πιστεύωνbelieving εἰςin αὐτὸνHim μὴnot ἀπόληταιshould perish, ἀλλ᾽but ἔχῃshould have ζωὴνlife αἰώνιονeternal.

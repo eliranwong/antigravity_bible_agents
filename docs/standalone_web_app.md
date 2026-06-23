@@ -130,8 +130,11 @@ The interface is divided into several key areas:
 
 Displays all files in your workspace. It features context-aware controls:
 - **↻ Refresh Button**: Refreshes the file tree dynamically to load new files.
-- **🗑 Delete Button (Red)**: Displays when a deletable file or folder is selected. Prompts with a confirmation modal. Folder/file deletion is strictly restricted to nested workspace contents under `biblemate/`, `images/`, `export/md/`, and `export/docx/`. All `README.md` files (case-insensitive) and the `docs/` folder/documentation files are protected and cannot be deleted.
+- **🗑 Delete Button (Red)**: Displays when a deletable file or folder is selected. Prompts with a confirmation modal. Folder/file deletion is strictly restricted to nested workspace contents under `biblemate/`, `images/`, `export/`, and `notes/`. All `README.md` files (case-insensitive) and the `docs/` folder/documentation files are protected and cannot be deleted.
 - **📥 Export Button (Blue)**: Displays only when a Markdown (`*.md`) file is selected. Clicking this button converts the markdown file into a Word Document (`.docx`) using `pandoc`. The exported file is named with the format `YYYY-MM-DD-HH-MM-SS_<original_name>.docx` and saved in `export/docx/`.
+- **Edit Button (Green pencil)**: Displays when a deletable markdown file is selected. Opens the file in the browser-based inline text editor for modification.
+- **Add File/Folder Buttons**: Display when selecting the `notes` folder or any nested subfolder inside it, allowing user-driven file and folder creation.
+
 
 ### Chat Workspace (Default Tab)
 
@@ -233,34 +236,50 @@ After generation completes:
 
 ---
 
-## 7. File Tree & Document Reader
+## 7. File Tree, Document Reader & Editor
 
-The left drawer contains a dynamic file tree showing all saved study outputs, generated images, and documentation, organized into four root folders:
+The left drawer contains a dynamic file tree showing all saved study outputs, generated images, notes, and documentation, organized into five root folders:
 
 | Folder | Contents |
 | :--- | :--- |
 | `biblemate/` | Markdown study outputs saved by BibleMate skills |
 | `export/` | Exported `.md` and `.docx` files |
 | `images/` | AI-generated Bible images (`.png`, `.jpg`, `.jpeg`) |
+| `notes/` | User-created notes, subfolders, and documents |
 | `docs/` | System setup and usage documentation |
 
-### Selecting a File
+### Selecting a File & Previewing
 
-- Click any **`.md`** file (e.g. from `biblemate/`, `export/md/`, or `docs/`) to open and render it in the Document Reader tab.
+- Click any **`.md`** file (e.g. from `biblemate/`, `export/`, `notes/`, or `docs/`) to open and render it in the Document Reader tab.
 - Click any **image file** to display it inline in the Document Reader tab.
 - Click any **`.docx`** file to trigger a client-side download automatically.
 - Selecting a file switches the app to the **Reader tab** (except for `.docx` files, which download directly).
 
+### Editing Markdown Files Inline
+
+You can edit any user-modifiable markdown file (located under `biblemate/`, `export/`, or `notes/`, excluding `README.md` files) directly in your browser:
+1. Select the markdown file in the sidebar file tree.
+2. Click the green **Edit (pencil icon)** button in the sidebar header.
+3. The Document Reader panel transforms into an interactive text editor.
+4. Modify the markdown content, and click **Save** to write changes to disk and return to the preview layout, or click **Cancel** to discard edits.
+
+### File & Folder Creation in `notes/`
+
+When you select the root `notes/` directory or any subfolder within it, two new action buttons appear in the sidebar header:
+* **Add File** (📄 icon): Prompts you for a filename, creates a new markdown file (automatically appends `.md` if omitted), and saves it under the selected directory.
+* **Add Folder** (📁 icon): Prompts you for a folder name and creates a new subfolder under the selected directory. Empty subfolders display immediately in the file tree.
+
 ### Protected Folders and Files
 
 To prevent accidental data loss, the web application explicitly blocks deletion of:
-- Root directories (`biblemate`, `images`, `export`, `docs`)
+- Root directories (`biblemate`, `images`, `export`, `docs`, `notes`)
 - Any `README.md` file (case-insensitive) in any directory
 - Any file or subdirectory inside the `docs/` folder
 
 ### Refreshing the Tree
 
-After a study run or export, click the **↻** button in the drawer header to reload the tree and see newly generated files.
+After a study run, file creation, or export, click the **↻** button in the drawer header to reload the tree and see newly generated files/folders.
+
 
 ---
 
