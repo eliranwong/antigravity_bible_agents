@@ -714,6 +714,8 @@ class BibleMateApp:
             self.terminal_logs.clear()
             # Hide the progress console on a new conversation
             self.progress_container.set_visibility(False)
+            if hasattr(self, 'main_tabs') and self.main_tabs:
+                self.main_tabs.set_value('chat')
             ui.notify("Conversation cleared. Starting afresh!", type='info')
         except Exception as e:
             ui.notify(f"Error clearing conversation: {e}", type='warning')
@@ -898,6 +900,8 @@ class BibleMateApp:
             return
         # Clear text entry field
         message_input.value = ''
+        if hasattr(self, 'main_tabs') and self.main_tabs:
+            self.main_tabs.set_value('chat')
         await self.execute_agent_chat(query)
 
 if __name__ == '__main__':
