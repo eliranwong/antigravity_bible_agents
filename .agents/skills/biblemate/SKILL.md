@@ -220,6 +220,7 @@ Use `--save-final-response` to save the final deliverable as `NNN-final_response
 | `morphology` | Retrieve morphological parsing data |
 | `data` | List available bible/commentary/lexicon versions |
 | `search` | Full-text search across bible databases |
+| `daily-read` | Retrieve scheduled daily bible readings and text |
 | Book-specific skills (e.g., `Gen`, `John`) | Search within a single book |
 
 ### Analytical Skills (Phase 2 — interpret and analyze data)
@@ -233,6 +234,8 @@ Use `--save-final-response` to save the final deliverable as `NNN-final_response
 | `ot-highlights` / `nt-highlights` | Key highlights and summaries |
 | `character` | Biblical character biographical study |
 | `location` | Biblical location study |
+| `chronology` | Timeline and historical chronological study |
+| `names` | Study of personal/place name meanings |
 
 ### Theological Skills (Phase 3 — synthesize doctrine and theology)
 | Skill | Purpose |
@@ -284,6 +287,8 @@ Select skills based on the classified study type. **Required** skills must appea
 | `xrefs` | `application` |
 | `themes` | `devotion` |
 | `insights` | `prayer` |
+| — | `chronology` |
+| — | `names` |
 
 ### Book Study
 > e.g., "Introduce the book of Romans", "Overview of Genesis"
@@ -295,6 +300,7 @@ Select skills based on the classified study type. **Required** skills must appea
 | `outline` | `character` |
 | `canon` | `location` |
 | `themes` | `chapter-summary` (key chapters) |
+| — | `chronology` |
 
 ### Topical Study
 > e.g., "Study the topic of grace", "What does the Bible say about suffering?"
@@ -317,7 +323,8 @@ Select skills based on the classified study type. **Required** skills must appea
 | `keywords` | `original` |
 | `sermon` or `devotion` | `flow` |
 | `application` | `questions` |
-| `prayer` | — |
+| `prayer` | `chronology` |
+| — | `names` |
 
 ---
 

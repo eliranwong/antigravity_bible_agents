@@ -1,6 +1,6 @@
 # Slash Commands & Workflows Reference Guide
 
-This guide details all 114 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
+This guide details all 120 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
 
 ---
 
@@ -19,6 +19,7 @@ These commands focus on original languages, structural analysis, and the logical
 | **`/morphology`** | Retrieves word-by-word grammar and morphology data, with optional keyword or phrase filtering. | Verse Scripter | A bible reference(s) with optional keyword filtering | `/morphology love the world in John 3:16` |
 | **`/original`** | Retrieves the original Greek or Hebrew text of a Bible verse using the local OHGB database. | Verse Scripter | A bible reference(s) | `/original John 1:1` |
 | **`/interlinear`** | Retrieves the interlinear Greek/Hebrew text of a Bible verse using the local OHGBi database. | Verse Scripter | A bible reference(s) | `/interlinear John 1:1` |
+| **`/names`** | Retrieves and compares the etymological meanings of personal or place names in the Bible. | Biblical Linguistic Analyst | A biblical name or query with optional version | `/names Abigail` |
 
 ---
 
@@ -36,6 +37,7 @@ These commands locate the scripture within its historical-cultural setting and i
 | **`/ot-highlights`** | Outlines major historical events, covenants, and highlights in an OT text. | OT Bible Scholar | An OT passage | `/ot-highlights Genesis 15` |
 | **`/nt-highlights`** | Outlines major historical events, covenants, and highlights in a NT text. | NT Bible Scholar | A NT passage | `/nt-highlights Matthew 2` |
 | **`/ot-highligths`** | *Compatibility duplicate of `/ot-highlights`.* | OT Bible Scholar | An OT passage | `/ot-highligths Genesis 15` |
+| **`/chronology`** | Expounds biblical timelines and event dates using local chronology datasets. | OT Bible Scholar (OT) / NT Bible Scholar (NT) | A chronological event, king, or character name | `/chronology Solomon reign` |
 
 ---
 
@@ -73,6 +75,7 @@ These commands focus on practical living, personal prayer, and preparing to teac
 | **`/short-prayer`** | Writes a brief, direct scriptural prayer (single paragraph) based on the text. | Compassionate Pastor | A bible passage | `/short-prayer Psalm 19` |
 | **`/promises`** | Quotes and explains biblical promises related to a topic. | Verse Scripter | A biblical topic | `/promises Anxiety` |
 | **`/quotes`** | Finds and quotes multiple relevant cross-references. | Verse Scripter | A biblical topic or query | `/quotes Covenant` |
+| **`/daily-read`** | Retrieves the scheduled daily bible readings for a given date or today, and retrieves the bible texts. | Verse Scripter | A date or relative expression (e.g. 'today', 'tomorrow') | `/daily-read today` |
 | **`/bible`** | Retrieves and compares Bible verses line-by-line from local databases. | Verse Scripter | A bible version(s) and reference(s) | `/bible NET CUV John 3:16-18` |
 | **`/commentary`** | Retrieves and compares Bible commentaries from local databases, extracting verse-specific sections. | Verse Scripter | A commentary version(s) and reference(s) | `/commentary AIC BI John 3:16-18` |
 | **`/xrefs`** | Retrieves and compares Bible cross-references from the local cross-reference database. | Verse Scripter | A bible version(s) and reference(s) | `/xrefs NET CUV John 3:16-18` |

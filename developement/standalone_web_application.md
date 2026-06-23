@@ -5,7 +5,7 @@ This document describes the design, directory layout, and execution instructions
 ## Overview
 The web application provides a responsive, web-based control center for running local Bible study agents, monitoring their execution in real-time, and browsing generated exegesis reports.
 
-- **Main File**: [web_app.py](file:///Users/admin/dev/antigravity-biblemate-workspace/web_app.py)
+- **Main File**: [web_app.py](web_app.py)
 - **Default Port**: `33377`
 - **Theme**: Dark Mode (default), toggleable to Light Mode.
 
@@ -15,7 +15,7 @@ The web application provides a responsive, web-based control center for running 
 
 1. **Responsive Flex Grid**: Adapts dynamically to desktop, tablet, and mobile browsers.
 2. **Left Drawer (Collapsible Workspace Tree)**:
-   - Displays files recursively in folders: [biblemate/](file:///Users/admin/dev/antigravity-biblemate-workspace/biblemate), [export/](file:///Users/admin/dev/antigravity-biblemate-workspace/export), [images/](file:///Users/admin/dev/antigravity-biblemate-workspace/images), and [docs/](file:///Users/admin/dev/antigravity-biblemate-workspace/docs).
+   - Displays files recursively in folders: [biblemate/](biblemate), [export/](export), [images/](images), and [docs/](docs).
    - Dynamically filters Markdown (`.md`), images (`.png`, `.jpg`, `.jpeg`), and Word (`.docx`) documents.
    - Clicking `.md` or images loads them in the Document Reader, while clicking `.docx` files triggers an instant client download.
    - **Refresh Button**: Dynamically reloads the sidebar file tree to display new files.
@@ -23,8 +23,8 @@ The web application provides a responsive, web-based control center for running 
    - **📥 Export Button (Blue)**: Shows only when a Markdown (`*.md`) file is selected. Invokes `pandoc` asynchronously to compile it to a Word document inside `export/docx/`, prefixed with a `YYYY-MM-DD-HH-MM-SS_` timestamp.
 3. **Right Drawer (Settings Panel)**:
    - **AI Model**: Selection dropdown mapping to active Gemini API models.
-   - **Active Persona**: Dynamically parsed from [.agents/agents.md](file:///Users/admin/dev/antigravity-biblemate-workspace/.agents/agents.md) on startup.
-   - **Enforced Skill**: Dynamically scanned from [.agents/skills/](file:///Users/admin/dev/antigravity-biblemate-workspace/.agents/skills) directories on startup.
+   - **Active Persona**: Dynamically parsed from [.agents/agents.md](.agents/agents.md) on startup.
+   - **Enforced Skill**: Dynamically scanned from [.agents/skills/](.agents/skills) directories on startup.
 4. **Chat Panel (Interactive Input)**:
    - **Autocomplete Dropdown**: When Enforced Skill is `'Auto'` and user types `/`, a scrollable dropdown suggestions menu displays matching command names in real time. Clicking a command inserts it with a trailing space and focuses the textarea.
    - **Keyboard Shortcuts**: Pressing `Ctrl+S` (or `Cmd+S` on Mac) while typing inside the textarea triggers the send action immediately and blocks default browser Save As dialogs.

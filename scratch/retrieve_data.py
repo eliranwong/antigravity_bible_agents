@@ -3,8 +3,8 @@ import sys
 import subprocess
 import tempfile
 
-WORKSPACE = "/Users/admin/dev/antigravity-biblemate-workspace"
-FOLDER = "/Users/admin/dev/antigravity-biblemate-workspace/biblemate/2026-06-21-17-34-29_super_john_3_16_exegetical_and_theological_study"
+WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FOLDER = os.path.join(WORKSPACE, "biblemate", "2026-06-21-17-34-29_super_john_3_16_exegetical_and_theological_study")
 ORCHESTRATOR = os.path.join(WORKSPACE, ".agents", "skills", "biblemate-super", "biblemate_super_orchestrator.py")
 
 # Paths to retrievers

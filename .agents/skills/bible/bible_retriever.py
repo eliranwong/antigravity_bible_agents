@@ -298,18 +298,58 @@ def main():
         current_book_name = OFFICIAL_BOOK_NAMES[book_num]
         ref_output = []
         
-        for ch, vs in all_coords:
+        # Group consecutive verses into passage chunks
+        chunks = []
+        current_chunk = []
+        for coord in all_coords:
+            if not current_chunk:
+                current_chunk.append(coord)
+            else:
+                last_coord = current_chunk[-1]
+                # If they belong to the same chapter and verses are consecutive
+                if coord[0] == last_coord[0] and coord[1] == last_coord[1] + 1:
+                    current_chunk.append(coord)
+                else:
+                    chunks.append(current_chunk)
+                    current_chunk = [coord]
+        if current_chunk:
+            chunks.append(current_chunk)
+
+        for chunk in chunks:
+            start_ch, start_vs = chunk[0]
+            _, end_vs = chunk[-1]
+            
+            if len(chunk) == 1:
+                ref_range = f"{start_ch}:{start_vs}"
+            else:
+                ref_range = f"{start_ch}:{start_vs}-{end_vs}"
+                
             if len(versions) == 1:
                 ver = versions[0]
-                text = coords_map[(ch, vs)].get(ver, "(Verse not found)")
-                ref_output.append(f"**{current_book_name} {ch}:{vs} ({ver})**")
-                ref_output.append(text)
+                if len(chunk) == 1:
+                    text = coords_map[chunk[0]].get(ver, "(Verse not found)")
+                    ref_output.append(f"**{current_book_name} {ref_range} ({ver})**")
+                    ref_output.append(text)
+                else:
+                    passage_parts = []
+                    for ch, vs in chunk:
+                        text = coords_map[(ch, vs)].get(ver, "(Verse not found)")
+                        passage_parts.append(f"[{vs}] {text}")
+                    ref_output.append(f"**{current_book_name} {ref_range} ({ver})**")
+                    ref_output.append(" ".join(passage_parts))
                 ref_output.append("")
             else:
-                ref_output.append(f"**{current_book_name} {ch}:{vs}**")
+                ref_output.append(f"**{current_book_name} {ref_range}**")
                 for ver in versions:
-                    text = coords_map[(ch, vs)].get(ver, "(Verse not found)")
-                    ref_output.append(f"- **[{ver}]** {text}")
+                    if len(chunk) == 1:
+                        text = coords_map[chunk[0]].get(ver, "(Verse not found)")
+                        ref_output.append(f"- **[{ver}]** {text}")
+                    else:
+                        passage_parts = []
+                        for ch, vs in chunk:
+                            text = coords_map[(ch, vs)].get(ver, "(Verse not found)")
+                            passage_parts.append(f"[{vs}] {text}")
+                        ref_output.append(f"- **[{ver}]** {' '.join(passage_parts)}")
                 ref_output.append("")
                 
         output_parts.append("\n".join(ref_output).strip())
