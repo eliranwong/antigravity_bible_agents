@@ -5,15 +5,19 @@ import re
 import sqlite3
 import datetime
 
-# Add local data directory to path to load self-contained bible_locations.py
+# Load self-contained bible_locations.py dynamically via direct file reading
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(SCRIPT_DIR, 'data')
-sys.path.insert(0, DATA_DIR)
+locations_file = os.path.join(SCRIPT_DIR, 'data', 'bible_locations.py')
+allLocations = {}
 
 try:
-    from bible_locations import allLocations
-except ImportError as e:
-    print(f"Error importing bible_locations: {e}", file=sys.stderr)
+    with open(locations_file, 'r', encoding='utf-8') as f:
+        file_content = f.read()
+    local_vars = {}
+    exec(file_content, {}, local_vars)
+    allLocations = local_vars.get('allLocations', {})
+except Exception as e:
+    print(f"Error loading location database content: {e}", file=sys.stderr)
     sys.exit(1)
 
 def levenshtein_distance(s1, s2):
