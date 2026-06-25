@@ -68,6 +68,12 @@ Retrieve raw data from local databases. These skills are independent and CAN run
 - `xrefs` — Retrieve cross-references for the passage
 - `commentary` — Retrieve published commentary entries
 - `lexicon` — Retrieve dictionary definitions for key Strong's numbers identified
+- `dictionaries` — Retrieve dictionary definitions for key terms or names in the passage
+- `encyclopedias` — Retrieve encyclopedia entries for key geographical, historical, or theological terms
+
+> [!TIP]
+> **Context Window Management & Parallel Dispatch**:
+> To prevent blowing up the active context window with large raw database outputs in a single turn, use the `schedule` tool (with `DurationSeconds="1"`) to dispatch the retrieval skills. By yielding control back to the system, you break execution into smaller, independent steps. Write each retrieved data output to the study folder, and read them only when needed in subsequent phases rather than keeping the massive raw text in the active conversation context.
 
 **After completing this phase**: Save each output using `--save-step`. Audit the results — if any skill returned empty or incomplete data, investigate why (wrong reference format? missing database?) and retry or note the gap.
 
@@ -215,6 +221,8 @@ Use `--save-final-response` to save the final deliverable as `NNN-final_response
 | `commentary` | Retrieve published commentary entries |
 | `xrefs` | Retrieve cross-reference chains |
 | `lexicon` | Retrieve Strong's dictionary/lexicon entries |
+| `dictionaries` | Retrieve dictionary definitions and historical/theological descriptions |
+| `encyclopedias` | Retrieve encyclopedia definitions and historical/theological descriptions |
 | `original` | Retrieve Greek/Hebrew original text (OHGB) |
 | `interlinear` | Retrieve interlinear word-by-word data (OHGBi) |
 | `morphology` | Retrieve morphological parsing data |

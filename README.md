@@ -5,7 +5,7 @@
 > [!NOTE]
 > **Where Rigorous Scholarship Meets Agentic Power:** This repository unites the advanced agentic workflow capability of the **Google Antigravity Platform** with the reliable, time-tested databases of the **[UniqueBible Project](https://github.com/eliranwong/UniqueBible)** and the modular AI exegesis tools of **[BibleMate AI](https://github.com/eliranwong/biblemate)**.
 
-Welcome to the **Antigravity BibleMate Workspace**, a state-of-the-art local agentic study suite configured specifically as an extension for the **Google Antigravity** development platform (compatible with the Antigravity CLI, IDE, and platform). It features an integrated team of 15 customized study personas, 121 standalone exegesis and theology skills, and 121 custom slash commands.
+Welcome to the **Antigravity BibleMate Workspace**, a state-of-the-art local agentic study suite configured specifically as an extension for the **Google Antigravity** development platform (compatible with the Antigravity CLI, IDE, and platform). It features an integrated team of 15 customized study personas, 123 standalone exegesis and theology skills, and 123 custom slash commands.
 
 Whether you are a **pastor preparing a sermon**, a **bible content writer drafting articles**, a **theology student researching ancient manuscripts**, or a **believer deepening your study of the scriptures**, this workspace provides a unified, local-first environment where writing, AI agent assistance, and scholarly databases reside side-by-side in your IDE.
 
@@ -57,9 +57,11 @@ graph TD
         Phase1 --> Db3[("Commentaries")]
         Phase1 --> Db4[("Lexicons & Morphology")]
         Phase1 --> Db5[("Cross-References")]
+        Phase1 --> Db6[("Bible Dictionaries")]
+        Phase1 --> Db7[("Encyclopedias")]
     end
 
-    Db1 & Db2 & Db3 & Db4 & Db5 --> Phase2["Phase 2: Analysis & Exegesis"]
+    Db1 & Db2 & Db3 & Db4 & Db5 & Db6 & Db7 --> Phase2["Phase 2: Analysis & Exegesis"]
     subgraph Phase2_Sub ["Phase 2: Exegesis (OT & NT Bible Scholar)"]
         Phase2 --> Outline["Structural Outline"]
         Phase2 --> Keywords["Word Study"]

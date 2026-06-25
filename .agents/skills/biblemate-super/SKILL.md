@@ -66,6 +66,10 @@ For each planned step in Phase $K$:
 2. **Run Skills/Tools**: Run the designated skill or command. Always feed in context from earlier phases (e.g., passing original text to `keywords`, or feeding exegesis into `themes`).
 3. **Save Output**: Use `--save-step` to save as `NNN-skill_name.md` (pass content via temporary file). Verify that the file is saved successfully and is detailed.
 
+> [!TIP]
+> **Context Window Management & Asynchronous Dispatch**:
+> During execution of long or multiple parallel steps, use the `schedule` tool (with `DurationSeconds="1"`) to dispatch tasks and yield control back to the system. This breaks up execution into smaller agent turns, avoiding the accumulation of huge command outputs in a single conversation history, and allows you to fetch/save step files independently.
+
 #### Step 2: Phase Audit Gate
 Once all planned steps for Phase $K$ are marked `- [x]`:
 1. **Adopt Auditor Persona**: Become the **Study Plan & Phase Quality Auditor**.
@@ -133,6 +137,8 @@ Select the best fit for each step task:
 | Original language grammar, word syntax, morphology | **Biblical Linguistic Analyst** | Lexical semantics, Greek/Hebrew syntax |
 | Personal/place name meanings in scripture | **Biblical Linguistic Analyst** | Study of names (onomastics), lexical mapping |
 | Original text translations, word-by-word mapping | **Biblical Translator** | Poetic ESV/KJV dialects, literal Greek/Hebrew maps |
+| Dictionary definitions, theological and historical terms | **Biblical Linguistic Analyst** / **OT or NT Bible Scholar** / **Bible Textual Critic** | Word lookups, historical descriptions, semantic ranges |
+| Encyclopedia entries, geographical and biographical data | **OT Bible Scholar** / **NT Bible Scholar** / **Context Analyst David** | Place, event, and character encyclopedia mapping |
 | Life of David, Monarchy history, Psalm backgrounds | **Context Analyst David** | Psalms context, 1 & 2 Samuel accounts |
 | Academic exegesis, structural outlines, archaeology (OT) | **OT Bible Scholar** | Historical-grammatical context, Old Testament book structures |
 | Academic exegesis, structural outlines, archaeology (NT) | **NT Bible Scholar** | Historical-grammatical context, New Testament book structures |

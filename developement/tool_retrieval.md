@@ -127,3 +127,39 @@ le.data tables `PEOPLE` and `PEOPLERELATIONSHIP`
 * Fully expound the data that are relevant to resolve users original requests. Provide full detail as much as possible.
 
 Remember, do not hardcode absolute path, to make this repository portable.
+
+# Dictionaries
+
+Create a new skill `dictionaries` with slash command `/dictionaries` to retrieve dictionary data.
+
+work for `developement/data/dictionaries_dict.py` as a reference or source data for the skill.  Copy this data to the skill folder, and make the skill indepependent of this original file path.  This script is a python dict for quick lookup.
+
+when users submit their requests using dictionaries skill to best match with the keys in `dictionaries_dict.py` and retrieve the corresponding path(s), and then retrieve the content from `dictionary.data`.  If there are multiple paths for the same entry, retrieve all of them.
+
+Make sure this skill offers flexible searching, as users may submit their requests with various spellings or phrasings.  Similar to `/people` and `/promises` skill, return at most 10 results at once.
+
+work with the sqlite file ~/biblemate/data/data/dictionary.data table `Dictionary`, to use path for content retrieval.  The table `Dictionary` has columns `entry` and `path`.
+
+Remember, do not hardcode absolute path, to make this repository portable.
+
+# Encyclopedia
+
+Along the same line with `/dictionaries` skill, create a new skill `encyclopedias` with slash command `/encyclopedias` to retrieve encyclopedia data.
+
+differences are:
+* the entries in encyclopedias are broader than dictionaries, include places, events, etc.
+* use `developement/data/encyclopedias_dict.py` as a reference or source data for the skill.  Copy this data to the skill folder, and make the skill indepependent of this original file path.  This script is a python dict for quick lookup.
+* For encyclopedia data retrieval, work with the sqlite file ~/biblemate/data/data/encyclopedia.data 
+
+There is a total 6 tables in the sqlite file:
+
+DAC - contains dictionary entries that starts with DAC and their contents.
+DCG - contains dictionary entries that starts with DCG and their contents.
+HAS - contains dictionary entries that starts with HAS and their contents.
+ISB - contains dictionary entries that starts with ISB and their contents.
+KIT - contains dictionary entries that starts with KIT and their contents.
+MSC - contains dictionary entries that starts with MSC and their contents.
+
+Note a subtle difference above that the table name for ISBE entries is "ISB" not "ISBE", while other tables are named with their full names.
+
+Use the same search and output logic as the skill `/dictionaries`.

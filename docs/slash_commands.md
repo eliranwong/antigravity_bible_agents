@@ -1,6 +1,6 @@
 # Slash Commands & Workflows Reference Guide
 
-This guide details all 120 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
+This guide details all 123 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
 
 ---
 
@@ -40,6 +40,8 @@ These commands locate the scripture within its historical-cultural setting and i
 | **`/chronology`** | Expounds biblical timelines and event dates using local chronology datasets. | OT Bible Scholar (OT) / NT Bible Scholar (NT) | A chronological event, king, or character name | `/chronology Solomon reign` |
 | **`/locations`** | Retrieves geographical coordinates, map links, and descriptions of a Bible location. | OT Bible Scholar (OT) / NT Bible Scholar (NT) / Biblical Linguistic Analyst | A bible location name | `/locations Jerusalem` |
 | **`/characters`** | Retrieves dictionary data, relations, paternal ancestry, and biographical details of Bible characters. | OT Bible Scholar (OT) / NT Bible Scholar (NT) / Biblical Linguistic Analyst | A bible character name | `/characters Amasai` |
+| **`/dictionaries`** | Retrieves dictionary definitions and historical/theological descriptions for a given term. | Biblical Linguistic Analyst / OT or NT Bible Scholar / Bible Textual Critic | A bible topic or word | `/dictionaries "Ark of Covenant"` |
+| **`/encyclopedias`** | Retrieves encyclopedia definitions and historical/theological descriptions for a given term. | OT Bible Scholar / NT Bible Scholar / Context Analyst David | A bible topic, location, or name | `/encyclopedias "David sin"` |
 
 ---
 
