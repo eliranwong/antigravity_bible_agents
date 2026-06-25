@@ -8,3 +8,30 @@
 .DS_Store
 Thumbs.db
 
+# Biblemate
+/biblemate/*
+!/biblemate/README.md
+
+# Export
+/export/*
+!/export/README.md
+!/export/docx/
+/export/docx/*
+!/export/docx/README.md
+!/export/md/
+/export/md/*
+!/export/md/README.md
+
+# Notes
+/notes/*
+!/notes/README.md
+
+# Images
+/images/*
+!/images/README.md
+!/images/Timelines/
+
+# Scratch
+/scratch/*
+!/scratch/README.md
+
