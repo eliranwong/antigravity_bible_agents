@@ -182,6 +182,15 @@ Then open **[http://localhost:33377](http://localhost:33377)** in your browser.
 
 ## Quick Start for a Local Workspace
 
+Prerequisites: Install the database (one-off operation):
+
+```bash
+pip install biblematedata
+biblematedata
+```
+
+Download the agents and setup the workspace folder:
+
 ```bash
 # Navigate to your workspace directory
 cd <workspace_directory_name>
