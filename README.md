@@ -196,7 +196,11 @@ Download the agents and setup the workspace folder:
 cd <workspace_directory_name>
 # Download and import into your workspace directory
 curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip manual_setup.zip && rm manual_setup.zip && mkdir -p biblemate notes images export
-# launch Antigravity
+```
+
+Launch Antigravity, for example:
+
+```bash
 antigravity-ide # or 'antigravity' (GUI without text editor) or agy (Antigravity CLI)
 ```
 
